@@ -4,14 +4,11 @@ import Link from "next/link";
 const RegisterPage = () => {
   return (
     <div className="flex flex-col items-center mt-10">
-      <h1 className="text-3xl font-bold mb-8">
-        <img
-          src="https://placehold.jp/30/dd6699/ffffff/240x70.png?text=タスク管理app"
-          alt="タスク管理app"
-        />
+      <h1 className="text-3xl font-bold mb-8 max-w-[240px] w-[80%]">
+        <img src="/logo.png" alt="タスク管理app" />
       </h1>
 
-      <div className="flex flex-col w-72">
+      <div className="flex flex-col w-72 mx-2">
         <label htmlFor="username" className="text-sm font-medium">
           ユーザー名
         </label>
