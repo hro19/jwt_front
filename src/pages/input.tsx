@@ -14,10 +14,11 @@ function Input() {
     watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = async (data:any) => {
+  const onSubmit = async (data: any) => {
     try {
-      const response = await authApi.register(data);
-      console.log(response);
+      const newuser = await authApi.register(data);
+      localStorage.setItem("token", newuser.data.token);
+      console.log(newuser.data);
       router.push("/tasks");
     } catch (error) {
       console.error(error);
