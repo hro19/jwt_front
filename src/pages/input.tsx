@@ -1,9 +1,19 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React, { useState } from "react";
+
 
 interface FormErrors {
   username?: string;
   password?: string;
   confirmPassword?: string;
+}
+
+interface InputProps {
+  label: string;
+  type: string;
+  name: string;
+  value: string;
+  onChange: () => void;
+  error?: string;
 }
 
 function Input() {
@@ -12,7 +22,7 @@ function Input() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState<FormErrors>({});
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (event:any) => {
     const { name, value } = event.target;
     if (name === "username") {
       setUsername(value);
@@ -23,36 +33,39 @@ function Input() {
     }
   };
 
-  const handleSubmit = (event: FormEvent) => {
+  const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
-    // バリデーションロジックを実装
-    const validationErrors: FormErrors = {};
-    if (username.trim() === "") {
-      validationErrors.username = "This field is required";
-    }
-    if (password.trim() === "") {
-      validationErrors.password = "This field is required";
-    }
-    if (confirmPassword.trim() === "") {
-      validationErrors.confirmPassword = "This field is required";
-    }
-    if (password !== confirmPassword) {
-      validationErrors.confirmPassword = "Passwords do not match";
-    }
-
+    const validationErrors = validateForm();
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
       // バリデーション成功時の処理
-      console.log("Form submitted successfully");
+      console.log("フォームが正常に送信されました");
     }
+  };
+
+  const validateForm = (): FormErrors => {
+    const validationErrors: FormErrors = {};
+    if (username.trim() === "") {
+      validationErrors.username = "ユーザー名を入力してください";
+    }
+    if (password.trim() === "") {
+      validationErrors.password = "パスワードを入力してください";
+    }
+    if (confirmPassword.trim() === "") {
+      validationErrors.confirmPassword = "確認用パスワードを入力してください";
+    }
+    if (password !== confirmPassword) {
+      validationErrors.confirmPassword = "パスワードが一致しません";
+    }
+    return validationErrors;
   };
 
   return (
     <form onSubmit={handleSubmit} className="max-w-sm mx-auto">
       <div className="mb-4">
-        <label className="block mb-2">Username</label>
+        <label className="block mb-2">ユーザー名</label>
         <input
           type="text"
           name="username"
@@ -66,7 +79,7 @@ function Input() {
       </div>
 
       <div className="mb-4">
-        <label className="block mb-2">Password</label>
+        <label className="block mb-2">パスワード</label>
         <input
           type="password"
           name="password"
@@ -80,7 +93,7 @@ function Input() {
       </div>
 
       <div className="mb-4">
-        <label className="block mb-2">Confirm Password</label>
+        <label className="block mb-2">パスワードの確認</label>
         <input
           type="password"
           name="confirmPassword"
@@ -95,7 +108,7 @@ function Input() {
 
       <button
         type="submit"
-        className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded"
+        className="bg-blue-500 text-white px-4 py-2 rounded"
       >
         Submit
       </button>
