@@ -1,5 +1,5 @@
 import React from "react";
-import { useForm, } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import axios from "axios";
 import ErrorBox from "../components/ErrorBox";
 import authApi from "../api/authApi";
