@@ -1,11 +1,13 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useForm, } from "react-hook-form";
 import axios from "axios";
 import ErrorBox from "../components/ErrorBox";
 import authApi from "../api/authApi";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 function Input() {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -16,6 +18,7 @@ function Input() {
     try {
       const response = await authApi.register(data);
       console.log(response);
+      router.push("/tasks");
     } catch (error) {
       console.error(error);
     }
