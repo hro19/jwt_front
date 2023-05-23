@@ -14,7 +14,7 @@ function Input() {
   } = useForm();
   const onSubmit = async (data:any) => {
     try {
-      const response = await await authApi.register(data);
+      const response = await authApi.register(data);
       console.log(response);
     } catch (error) {
       console.error(error);
