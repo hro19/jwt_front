@@ -13,7 +13,7 @@ function Input() {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm();
+  } = useForm({ mode: "onChange" });
   const onSubmit = async (data: any) => {
     try {
       const newuser = await authApi.register(data);
@@ -40,7 +40,17 @@ function Input() {
           </label>
           <input
             defaultValue=""
-            {...register("username", { required: true, minLength: 6 })}
+            {...register("username", {
+              required: "名前は必須です",
+              minLength: {
+                value: 4,
+                message: "名前は4文字以上で入力してください",
+              },
+              maxLength: {
+                value: 12,
+                message: "名前は12文字以下で入力してください",
+              },
+            })}
             className="p-2 mb-4 border border-gray-300 rounded focus:border-green-500 focus:ring-green-500"
             id="username"
           />
@@ -49,7 +59,13 @@ function Input() {
             パスワード
           </label>
           <input
-            {...register("password", { required: true, minLength: 6 })}
+            {...register("password", {
+              required: "パスワードは必須です",
+              minLength: {
+                value: 6,
+                message: "パスワードは6文字以上で入力してください",
+              },
+            })}
             className="p-2 mb-4 border border-gray-300 rounded focus:border-green-500 focus:ring-green-500"
             id="password"
           />
@@ -59,9 +75,9 @@ function Input() {
           </label>
           <input
             {...register("confirmPassword", {
-              required: true,
+              required: "確認用パスワードは必須です",
               validate: (value) =>
-                value === watch("password") || "パスワードが一致しません",
+                value === watch("password") || "確認用パスワードが一致しません",
             })}
             className="p-2 mb-4 border border-gray-300 rounded focus:border-green-500 focus:ring-green-500"
             id="confirmPassword"
