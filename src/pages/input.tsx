@@ -1,8 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { validationSchema } from "../components/inputVal";
-import { zodResolver } from "@hookform/resolvers/zod";
 import ErrorBox from "../components/ErrorBox";
 import authApi from "../api/authApi";
 import Link from "next/link";
@@ -15,7 +13,7 @@ function Input() {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm({ mode: "onChange", resolver: zodResolver(validationSchema) });
+  } = useForm({ mode: "onChange" });
   const onSubmit = async (data: any) => {
     try {
       const newuser = await authApi.register(data);
@@ -42,7 +40,17 @@ function Input() {
           </label>
           <input
             defaultValue=""
-            {...register("username")}
+            {...register("username", {
+              required: "名前は必須です",
+              minLength: {
+                value: 4,
+                message: "名前は4文字以上で入力してください",
+              },
+              maxLength: {
+                value: 12,
+                message: "名前は12文字以下で入力してください",
+              },
+            })}
             className="p-2 mb-4 border border-gray-300 rounded focus:border-green-500 focus:ring-green-500"
             id="username"
           />
@@ -51,7 +59,13 @@ function Input() {
             パスワード
           </label>
           <input
-            {...register("password")}
+            {...register("password", {
+              required: "パスワードは必須です",
+              minLength: {
+                value: 6,
+                message: "パスワードは6文字以上で入力してください",
+              },
+            })}
             className="p-2 mb-4 border border-gray-300 rounded focus:border-green-500 focus:ring-green-500"
             id="password"
           />
@@ -60,7 +74,11 @@ function Input() {
             確認用パスワード
           </label>
           <input
-            {...register("confirmPassword")}
+            {...register("confirmPassword", {
+              required: "確認用パスワードは必須です",
+              validate: (value) =>
+                value === watch("password") || "確認用パスワードが一致しません",
+            })}
             className="p-2 mb-4 border border-gray-300 rounded focus:border-green-500 focus:ring-green-500"
             id="confirmPassword"
           />
