@@ -1,6 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { validationSchema } from "../components/inputVal";
+import { zodResolver } from "@hookform/resolvers/zod";
 import ErrorBox from "../components/ErrorBox";
 import authApi from "../api/authApi";
 import Link from "next/link";
@@ -13,7 +15,7 @@ function Input() {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm({ mode: "onChange" });
+  } = useForm({ mode: "onChange", resolver: zodResolver(validationSchema) });
   const onSubmit = async (data: any) => {
     try {
       const newuser = await authApi.register(data);
@@ -35,54 +37,34 @@ function Input() {
         className="flex flex-col items-center"
       >
         <div className="flex flex-col w-72 mx-2">
-          <label htmlFor="username" className="mb-2">
+          <label htmlFor="username" className="mb-1">
             ユーザー名
           </label>
           <input
             defaultValue=""
-            {...register("username", {
-              required: "名前は必須です",
-              minLength: {
-                value: 4,
-                message: "名前は4文字以上で入力してください",
-              },
-              maxLength: {
-                value: 12,
-                message: "名前は12文字以下で入力してください",
-              },
-            })}
+            {...register("username")}
             className="p-2 mb-4 border border-gray-300 rounded focus:border-green-500 focus:ring-green-500"
             id="username"
           />
 
-          <label htmlFor="password" className="mb-2">
+          <label htmlFor="password" className="mb-1">
             パスワード
           </label>
           <input
-            {...register("password", {
-              required: "パスワードは必須です",
-              minLength: {
-                value: 6,
-                message: "パスワードは6文字以上で入力してください",
-              },
-            })}
+            {...register("password")}
             className="p-2 mb-4 border border-gray-300 rounded focus:border-green-500 focus:ring-green-500"
             id="password"
           />
 
-          <label htmlFor="confirmPassword" className="mb-2">
+          <label htmlFor="confirmPassword" className="mb-1">
             確認用パスワード
           </label>
           <input
-            {...register("confirmPassword", {
-              required: "確認用パスワードは必須です",
-              validate: (value) =>
-                value === watch("password") || "確認用パスワードが一致しません",
-            })}
+            {...register("confirmPassword")}
             className="p-2 mb-4 border border-gray-300 rounded focus:border-green-500 focus:ring-green-500"
             id="confirmPassword"
           />
-
+          <ErrorBox errors={errors} />
           <input
             type="submit"
             value="新規登録"
@@ -97,8 +79,6 @@ function Input() {
           へ
         </p>
       </form>
-
-      <ErrorBox errors={errors} />
     </div>
   );
 }
