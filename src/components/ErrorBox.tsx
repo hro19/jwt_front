@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ErrorBox = ({errors}:any) => {
+const ErrorBox = ({ errors, errorMessage }: any) => {
   return (
     <div className="err_box flex flex-col mt-2 text-center">
       {errors.username && (
@@ -18,8 +18,11 @@ const ErrorBox = ({errors}:any) => {
           {errors.confirmPassword.message as React.ReactNode}
         </span>
       )}
+      {errorMessage && (
+        <span className="text-red-500">{errorMessage}</span>
+      )}
     </div>
   );
-}
+};
 
 export default ErrorBox
