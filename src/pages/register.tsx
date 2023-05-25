@@ -1,41 +1,38 @@
 import React, { useState } from "react";
-import Link from "next/link";
-import axios from "axios";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import ErrorBox from "../components/ErrorBox";
 import authApi from "../api/authApi";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
-const RegisterPage = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+function Input() {
+  const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({ mode: "onChange" });
 
-  const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUsername(e.target.value);
-  };
-
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
-
-  const handleConfirmPasswordChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setConfirmPassword(e.target.value);
-  };
-
-  const handleSubmit = async () => {
+  const [errorMessage, setErrorMessage] = useState<string | null>(null); // 初期値は null とする
+  const onSubmit = async (data: any) => {
     try {
-      const response = await authApi.register({
-        username,
-        password,
-        confirmPassword,
-      });
-      // 登録成功の処理
-      console.log(response.data);
-    } catch (error) {
-      // エラーハンドリング
+      const newuser = await authApi.register(data);
+      localStorage.setItem("token", newuser.data.token);
+      console.log(newuser.data);
+      router.push("/tasks");
+    } catch (error: any) {
       console.error(error);
+      const errorMessage = error.data?.errors[0]?.msg;
+      console.log(errorMessage);
+      setErrorMessage(errorMessage); // エラーメッセージを更新
     }
+  };
+
+  // username のフォーカス時にエラーメッセージを空にする
+  const handleUsernameFocus = () => {
+    setErrorMessage(null);
   };
 
   return (
@@ -43,62 +40,76 @@ const RegisterPage = () => {
       <h1 className="text-3xl font-bold mb-8 max-w-[240px] w-[80%]">
         <img src="/logo.png" alt="タスク管理app" />
       </h1>
-
-      <div className="flex flex-col w-72 mx-2">
-        <label htmlFor="username" className="text-sm font-medium">
-          ユーザー名
-        </label>
-        <input
-          type="text"
-          id="username"
-          placeholder="ユーザー名"
-          className="p-2 mb-6 border border-gray-300 rounded focus:border-green-500 focus:ring-green-500"
-          value={username}
-          onChange={handleUsernameChange}
-        />
-
-        <label htmlFor="password" className="text-sm font-medium">
-          パスワード
-        </label>
-        <input
-          type="password"
-          id="password"
-          placeholder="パスワード"
-          className="p-2 mb-6 border border-gray-300 rounded focus:border-green-500 focus:ring-green-500"
-          value={password}
-          onChange={handlePasswordChange}
-        />
-
-        <label htmlFor="confirmPassword" className="text-sm font-medium">
-          確認用パスワード
-        </label>
-        <input
-          type="password"
-          id="confirmPassword"
-          placeholder="確認用パスワード"
-          className="p-2 mb-6 border border-gray-300 rounded focus:border-green-500 focus:ring-green-500"
-          value={confirmPassword}
-          onChange={handleConfirmPasswordChange}
-        />
-      </div>
-
-      <button
-        type="button"
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2"
-        onClick={handleSubmit}
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col items-center"
       >
-        新規登録する
-      </button>
+        <div className="flex flex-col w-72 mx-2">
+          <label htmlFor="username" className="mb-1">
+            ユーザー名
+          </label>
+          <input
+            defaultValue=""
+            {...register("username", {
+              required: "名前は必須です",
+              minLength: {
+                value: 4,
+                message: "名前は4文字以上で入力してください",
+              },
+              maxLength: {
+                value: 12,
+                message: "名前は12文字以下で入力してください",
+              },
+            })}
+            className="p-2 mb-4 border border-gray-300 rounded focus:border-green-500 focus:ring-green-500"
+            id="username"
+            onFocus={handleUsernameFocus} // フォーカス時のイベントハンドラを追加
+          />
 
-      <p className="text-sm mt-4">
-        既に登録済みの方は
-        <Link href="/login" className="text-blue-500 underline">
-          ログインページ
-        </Link>
-        へ
-      </p>
+          <label htmlFor="password" className="mb-1">
+            パスワード
+          </label>
+          <input
+            {...register("password", {
+              required: "パスワードは必須です",
+              minLength: {
+                value: 6,
+                message: "パスワードは6文字以上で入力してください",
+              },
+            })}
+            className="p-2 mb-4 border border-gray-300 rounded focus:border-green-500 focus:ring-green-500"
+            id="password"
+          />
+
+          <label htmlFor="confirmPassword" className="mb-1">
+            確認用パスワード
+          </label>
+          <input
+            {...register("confirmPassword", {
+              required: "確認用パスワードは必須です",
+              validate: (value) =>
+                value === watch("password") || "確認用パスワードが一致しません",
+            })}
+            className="p-2 mb-4 border border-gray-300 rounded focus:border-green-500 focus:ring-green-500"
+            id="confirmPassword"
+          />
+          <ErrorBox errors={errors} errorMessage={errorMessage} />
+          <input
+            type="submit"
+            value="新規登録"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2 w-[60%] mx-auto"
+          />
+        </div>
+        <p className="text-sm mt-4">
+          既に登録済みの方は
+          <Link href="/login" className="text-blue-500 underline">
+            ログインページ
+          </Link>
+          へ
+        </p>
+      </form>
     </div>
   );
-};
+}
 
-export default RegisterPage;
+export default Input;
