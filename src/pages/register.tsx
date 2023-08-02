@@ -21,7 +21,7 @@ function Input() {
       const newuser = await authApi.register(data);
       localStorage.setItem("token", newuser.data.token);
       console.log(newuser.data);
-      router.push("/tasks");
+      router.push("/admin/tasks");
     } catch (error: any) {
       console.error(error);
       const errorMessage = error.data?.errors[0]?.msg;
