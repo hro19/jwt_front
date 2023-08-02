@@ -12,19 +12,19 @@ import {
   Button,
 } from "@mui/material";
 
-const fetchTasks = async () => {
+const fetchUsers = async () => {
   const response = await axios.get("https://jwt-mongo.vercel.app/api/v1/users");
   return response.data;
 };
 
-const useTasksQuery = () => {
-  return useQuery("users", fetchTasks);
+const useUsersQuery = () => {
+  return useQuery("users", fetchUsers);
 };
 
-const Tasks = () => {
-  const { data: tasks, isLoading, error, refetch } = useTasksQuery();
+const Users = () => {
+  const { data: users, isLoading, error, refetch } = useUsersQuery();
 
-  const deleteTaskMutation = useMutation(
+  const deleteUserMutation = useMutation(
     (userId) => axios.delete(`https://jwt-mongo.vercel.app/api/v1/users/${userId}`),
     {
       onSuccess: () => {
@@ -36,7 +36,7 @@ const Tasks = () => {
 
   const handleDelete = async(userId:any) => {
     try {
-      await deleteTaskMutation.mutateAsync(userId);
+      await deleteUserMutation.mutateAsync(userId);
     } catch (error) {
       console.log(error);
     }
@@ -64,7 +64,7 @@ const Tasks = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {tasks.map((user: any) => (
+            {users.map((user: any) => (
               <TableRow key={user._id}>
                 <TableCell>{user.username}</TableCell>
                 <TableCell>{user._id}</TableCell>
@@ -86,4 +86,4 @@ const Tasks = () => {
   );
 };
 
-export default Tasks;
+export default Users;
