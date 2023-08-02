@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import ErrorBox from "../components/ErrorBox";
 import authApi from "../api/authApi";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-function Input() {
+function Resister() {
   const router = useRouter();
   const {
     register,
@@ -112,4 +111,4 @@ function Input() {
   );
 }
 
-export default Input;
+export default Resister;
