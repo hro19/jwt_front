@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { useQuery } from "react-query";
 import {
   Table,
   TableBody,
@@ -10,9 +11,19 @@ import {
   Paper,
   Button,
 } from "@mui/material";
-import { styled } from "@mui/system";
 
-const Tasks = ({ tasks }:any) => {
+const fetchTasks = async () => {
+  const response = await axios.get("https://jwt-mongo.vercel.app/api/v1/tasks");
+  return response.data;
+};
+
+const useTasksQuery = () => {
+  return useQuery("tasks", fetchTasks);
+};
+
+const Tasks = () => {
+  const { data: tasks, isLoading, error } = useTasksQuery();
+
   const handleDelete = async (taskId:string) => {
     try {
       await axios.delete(`https://jwt-mongo.vercel.app/api/v1/tasks/${taskId}`);
@@ -21,6 +32,14 @@ const Tasks = ({ tasks }:any) => {
       console.log(error);
     }
   };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error</div>;
+  }
 
   return (
     <div className="container mx-auto my-4">
@@ -59,18 +78,3 @@ const Tasks = ({ tasks }:any) => {
 };
 
 export default Tasks;
-
-export async function getServerSideProps() {
-  try {
-    const response = await axios.get("https://jwt-mongo.vercel.app/api/v1/tasks");
-    const tasks = response.data;
-    return {
-      props: { tasks },
-    };
-  } catch (error) {
-    console.log(error);
-    return {
-      props: { tasks: [] },
-    };
-  }
-}
