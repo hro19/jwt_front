@@ -14,6 +14,11 @@ function Login() {
   } = useForm({ mode: "onChange" });
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null); // 初期値は null とする
+
+  // DBのUser情報のユーザー名とパスワードの一致についてのエラー文を設置
+  const [usernameErrText, setUsernameErrText] = useState("");
+  const [passwordErrText, setPasswordErrText] = useState("");
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const { username, password } = data; // react-hook-formによりdataオブジェクトから入力値を取得
     //ログイン用APIを叩く
@@ -25,7 +30,17 @@ function Login() {
       localStorage.setItem("token", res.data.token);
       router.push("/admin/tasks");
     } catch (err) {
-      console.log("err");
+      // console.log(err);
+      const cherrors = (err as any).data.errors;
+      console.log(cherrors);
+      cherrors.forEach((e: any) => {
+        if (e.param === "username") {
+          setUsernameErrText(e.msg);
+        }
+        if (e.param === "password") {
+          setPasswordErrText(e.msg);
+        }
+      });
     }
   };
 
@@ -77,6 +92,10 @@ function Login() {
             id="password"
           />
           <ErrorBox errors={errors} errorMessage={errorMessage} />
+          <p className="text-red-600">
+            {usernameErrText}
+            {passwordErrText}
+          </p>
           <input
             type="submit"
             value="ログイン"
