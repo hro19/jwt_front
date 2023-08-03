@@ -10,13 +10,23 @@ function Login() {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm({ mode: "onChange" });
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null); // 初期値は null とする
   const onSubmit = async (data: any) => {
-      console.log("送信");
+    const { username, password } = data; // react-hook-formによりdataオブジェクトから入力値を取得
+    //ログイン用APIを叩く
+    try {
+      const res = await authApi.login({
+        username,
+        password,
+      });
+      localStorage.setItem("token", res.data.token);
+      router.push("/admin/tasks");
+    } catch (err) {
+      console.log("err");
+    }
   };
 
   // username のフォーカス時にエラーメッセージを空にする
