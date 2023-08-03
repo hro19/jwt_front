@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 import ErrorBox from "../components/ErrorBox";
 import authApi from "../api/authApi";
 import Link from "next/link";
@@ -14,7 +14,7 @@ function Login() {
   } = useForm({ mode: "onChange" });
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null); // 初期値は null とする
-  const onSubmit = async (data: any) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const { username, password } = data; // react-hook-formによりdataオブジェクトから入力値を取得
     //ログイン用APIを叩く
     try {
