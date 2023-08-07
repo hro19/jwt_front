@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import authUtils from "../utils/authUtils";
+import authUtils from '../utils/authUtils';
 
 const Verify = () => {
 
@@ -12,6 +12,7 @@ const Verify = () => {
         console.log("認証に失敗でござります");
       } else {
         console.log("認証に大大大大大大成功");
+        console.log(isAuth.data.user);
       }
     };
     checkAuth();
