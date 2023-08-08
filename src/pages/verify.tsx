@@ -1,10 +1,20 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios"; // axiosをインポートする
-
+import axios from "axios";
 import authUtils from "../utils/authUtils";
 
+const fetchUserTasks = async (userId: string) => {
+  try {
+    const response = await axios.get(
+      `https://jwt-mongo.vercel.app/api/v1/tasks/${userId}/usertasks`
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error("タスク情報の取得に失敗しました");
+  }
+};
+
 const Verify = () => {
-  const [tasks, setTasks] = useState([]); // タスク情報を保持するステート
+  const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -17,10 +27,8 @@ const Verify = () => {
 
         // ユーザーのタスク情報を取得
         try {
-          const response = await axios.get(
-            `https://jwt-mongo.vercel.app/api/v1/tasks/${userId}/usertasks`
-          );
-          setTasks(response.data); // タスク情報をステートにセット
+          const response = await fetchUserTasks(userId); // fetchUserTasks関数を呼び出す
+          setTasks(response);
         } catch (error) {
           console.error("タスク情報の取得に失敗しました", error);
         }
@@ -33,7 +41,7 @@ const Verify = () => {
     <div>
       <h1 className="text-3xl font-bold">タスク一覧</h1>
       <ul>
-        {tasks.map((task:any) => (
+        {tasks.map((task: any) => (
           <li key={task._id}>
             {task.name} - {task.completed ? "完了" : "未完了"}
           </li>
