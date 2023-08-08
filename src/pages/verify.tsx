@@ -15,6 +15,7 @@ const fetchUserTasks = async (userId: string) => {
 
 const Verify = () => {
   const [tasks, setTasks] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -29,18 +30,22 @@ const Verify = () => {
         try {
           const response = await fetchUserTasks(userId);
           setTasks(response);
+          setIsLoading(false);
         } catch (error) {
           console.error("タスク情報の取得に失敗しました", error);
         }
       }
     };
+
     checkAuth();
   }, []);
 
   return (
     <div>
       <h1 className="text-3xl font-bold">タスク一覧</h1>
-      {tasks.length === 0 ? (
+      {isLoading ? (
+        <p>読み込み中...</p>
+      ) : tasks.length === 0 ? (
         <p>タスクが登録されておりません</p>
       ) : (
         <ul>
