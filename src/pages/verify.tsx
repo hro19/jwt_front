@@ -27,7 +27,7 @@ const Verify = () => {
 
         // ユーザーのタスク情報を取得
         try {
-          const response = await fetchUserTasks(userId); // fetchUserTasks関数を呼び出す
+          const response = await fetchUserTasks(userId);
           setTasks(response);
         } catch (error) {
           console.error("タスク情報の取得に失敗しました", error);
@@ -40,13 +40,17 @@ const Verify = () => {
   return (
     <div>
       <h1 className="text-3xl font-bold">タスク一覧</h1>
-      <ul>
-        {tasks.map((task: any) => (
-          <li key={task._id}>
-            {task.name} - {task.completed ? "完了" : "未完了"}
-          </li>
-        ))}
-      </ul>
+      {tasks.length === 0 ? (
+        <p>タスクが登録されておりません</p>
+      ) : (
+        <ul>
+          {tasks.map((task: any) => (
+            <li key={task._id}>
+              {task.name} - {task.completed ? "完了" : "未完了"}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
