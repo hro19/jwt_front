@@ -4,8 +4,12 @@ import ErrorBox from "../components/ErrorBox";
 import authApi from "../api/authApi";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useAtom } from "jotai";
+import { userAtom } from "../jotai/userAtoms";
 
 function Login() {
+  const [user, setUser] = useAtom(userAtom);
+
   const router = useRouter();
   const {
     register,
@@ -28,7 +32,8 @@ function Login() {
         password,
       });
       localStorage.setItem("token", res.data.token);
-      router.push("/admin/tasks");
+      localStorage.setItem("userId", res.data.user._id);
+      router.push("/verify");
     } catch (err) {
       // console.log(err);
       const cherrors = (err as any).data.errors;
