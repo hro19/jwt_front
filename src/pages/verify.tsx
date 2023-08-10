@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import authUtils from "../utils/authUtils";
+import { useRouter } from "next/router";
 
 const fetchUserTasks = async (userId: string) => {
   try {
@@ -14,6 +15,7 @@ const fetchUserTasks = async (userId: string) => {
 };
 
 const Verify = () => {
+  const router = useRouter();
   const [tasks, setTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -21,7 +23,8 @@ const Verify = () => {
     const checkAuth = async () => {
       const isAuth = await authUtils.isAuthenticated();
       if (!isAuth) {
-        console.log("認証に失敗でござります");
+        // console.log("認証に失敗でござります");
+        router.push("/login");
       } else {
         console.log("認証に大大大大大大成功");
         const userId = isAuth.data.user._id;

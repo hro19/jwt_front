@@ -59,14 +59,16 @@ const Tasks = () => {
           <TableHead>
             <TableRow>
               <TableCell>タイトル</TableCell>
+              <TableCell>ユーザーID</TableCell>
               <TableCell>状態</TableCell>
               <TableCell>削除</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {tasks.map((task:any) => (
+            {tasks.map((task: any) => (
               <TableRow key={task._id}>
                 <TableCell>{task.name}</TableCell>
+                <TableCell>{task.userId}</TableCell>
                 <TableCell>{task.completed.toString()}</TableCell>
                 <TableCell>
                   <Button
