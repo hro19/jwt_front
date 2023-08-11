@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { Task } from "../../ts/Task";
 import { useQuery, useMutation } from "react-query";
 import {
   Table,
@@ -25,7 +26,8 @@ const Tasks = () => {
   const { data: tasks, isLoading, error, refetch } = useTasksQuery();
 
   const deleteTaskMutation = useMutation(
-    (taskId) => axios.delete(`https://jwt-mongo.vercel.app/api/v1/tasks/${taskId}`),
+    (taskId: string) =>
+      axios.delete(`https://jwt-mongo.vercel.app/api/v1/tasks/${taskId}`),
     {
       onSuccess: () => {
         // データの削除後にタスク一覧を再取得する
@@ -34,7 +36,7 @@ const Tasks = () => {
     }
   );
 
-  const handleDelete = async(taskId:any) => {
+  const handleDelete = async(taskId:string) => {
     try {
       await deleteTaskMutation.mutateAsync(taskId);
     } catch (error) {
@@ -65,7 +67,7 @@ const Tasks = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {tasks.map((task: any) => (
+            {tasks.map((task: Task) => (
               <TableRow key={task._id}>
                 <TableCell>{task.name}</TableCell>
                 <TableCell>{task.userId}</TableCell>
