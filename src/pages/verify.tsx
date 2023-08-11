@@ -14,11 +14,6 @@ const fetchUserTasks = async (userId: string) => {
 };
 
 const Verify = () => {
-  useEffect(() => {
-    const storedUserId = localStorage.getItem("userId");
-    setUserId(storedUserId); // userIdをセット
-  }, []);
-
   const [tasks, setTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [userId, setUserId] = useState<string|null>(null); // userIdをuseStateで管理

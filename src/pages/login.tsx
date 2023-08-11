@@ -32,7 +32,6 @@ function Login() {
         password,
       });
       localStorage.setItem("token", res.data.token);
-      localStorage.setItem("userId", res.data.user._id);
       router.push("/verify");
     } catch (err) {
       // console.log(err);
