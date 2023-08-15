@@ -2,10 +2,10 @@ import React from 'react'
 
 const page = () => {
   return (
-    <div className="text-4xl">
-      ssssss
-    </div>
-  )
+    <>
+      <h2 className="text-2xl text-center text-orange-800">ここは管理者専用のページです</h2>
+    </>
+  );
 }
 
 export default page
