@@ -14,7 +14,7 @@ const useUsersQuery = () => {
   return useQuery("users", fetchUsers);
 };
 
-const Users = () => {
+const AdminUsers = () => {
   const { data: users, isLoading, error, refetch } = useUsersQuery();
 
   const deleteUserMutation = useMutation(
@@ -55,4 +55,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default AdminUsers;
