@@ -46,9 +46,11 @@ const Users = () => {
   return (
     <div className="container mx-auto my-4">
       <h2 className="text-3xl font-bold text-center mb-4">ユーザー一覧</h2>
-      {users.map((user: any) => (
-        <UserTable user={user} handleDelete={handleDelete} key={user._id} />
-      ))}
+      <div className="grid gap-4 mx-2 grid-cols-1 lg:grid-cols-3 lg:mx-3">
+        {users.map((user: any) => (
+          <UserTable user={user} handleDelete={handleDelete} key={user._id} />
+        ))}
+      </div>
     </div>
   );
 };
