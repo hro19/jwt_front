@@ -16,7 +16,28 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <div className="flex flex-col items-center justify-between p-24">
+          <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-5 lg:text-left bg-slate-100">
+            <a href="/">
+              <h2 className={`mb-3 text-2xl font-semibold text-center`}>admin</h2>
+            </a>
+            <a href="/register">
+              <h2 className={`mb-3 text-2xl font-semibold text-center`}>register</h2>
+            </a>
+            <a href="/login">
+              <h2 className={`mb-3 text-2xl font-semibold text-center`}>login</h2>
+            </a>
+            <a href="/admin">
+              <h2 className={`mb-3 text-2xl font-semibold text-center`}>admin</h2>
+            </a>
+            <a href="/mapage">
+              <h2 className={`mb-3 text-2xl font-semibold text-center`}>mypage</h2>
+            </a>
+          </div>
+        </div>
+        {children}
+      </body>
     </html>
-  )
+  );
 }
