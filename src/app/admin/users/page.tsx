@@ -3,7 +3,7 @@
 import React from "react";
 import axios from "axios";
 import { useQuery, useMutation } from "react-query";
-import UserTable from "../../components/admin/UserTable";
+import UserTable from "@/components/admin/UserTable";
 
 const fetchUsers = async () => {
   const response = await axios.get("https://jwt-mongo.vercel.app/api/v1/users");

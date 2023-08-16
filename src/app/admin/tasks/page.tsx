@@ -4,7 +4,7 @@ import React from "react";
 import axios from "axios";
 // import { Task } from "../../ts/Task";
 import { useQuery, useMutation } from "react-query";
-import TaskTable from "../../components/admin/TaskTable";
+import TaskTable from "@/components/admin/TaskTable";
 
 const fetchTasks = async () => {
   const response = await axios.get("https://jwt-mongo.vercel.app/api/v1/tasks");
