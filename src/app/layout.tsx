@@ -19,24 +19,32 @@ export default function RootLayout({
     <AppProvider>
       <html lang="en">
         <body className={inter.className}>
+          <a href="/register">
+            <h2 className="">register</h2>
+          </a>
+          <a href="/login">
+            <h2 className="">login</h2>
+          </a>
           <div className="flex flex-col items-center justify-between mb-2">
             <div className="grid gap-1 text-center max-w-5xl w-full mb-0 grid-cols-5 text-base lg:text-2xl">
               <a href="/">
                 <h2 className={`mb-3 font-semibold text-center bg-slate-200`}>home</h2>
-              </a>
-              <a href="/register">
-                <h2 className={`mb-3 font-semibold text-center bg-slate-200`}>
-                  register
-                </h2>
-              </a>
-              <a href="/login">
-                <h2 className={`mb-3 font-semibold text-center bg-slate-200`}>login</h2>
               </a>
               <a href="/admin">
                 <h2 className={`mb-3 font-semibold text-center bg-slate-200`}>admin</h2>
               </a>
               <a href="/mypage">
                 <h2 className={`mb-3 font-semibold text-center bg-slate-200`}>mypage</h2>
+              </a>
+              <a href="/currency/php">
+                <h2 className={`mb-3 font-semibold text-center bg-slate-200`}>
+                  Currency_php
+                </h2>
+              </a>
+              <a href="/currency/jay">
+                <h2 className={`mb-3 font-semibold text-center bg-slate-200`}>
+                  Currency_jay
+                </h2>
               </a>
             </div>
           </div>
