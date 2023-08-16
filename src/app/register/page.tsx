@@ -1,52 +1,33 @@
 "use client";
 
 import React, { useState } from "react";
-import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import ErrorBox from "@/components/ErrorBox";
 import authApi from "@/api/authApi";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useAtom } from "jotai";
-import { userAtom } from "@/jotai/userAtoms";
 
-function Login() {
-  const [user, setUser] = useAtom(userAtom);
-
+function Resister() {
   const router = useRouter();
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm({ mode: "onChange" });
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null); // 初期値は null とする
-
-  // DBのUser情報のユーザー名とパスワードの一致についてのエラー文を設置
-  const [usernameErrText, setUsernameErrText] = useState("");
-  const [passwordErrText, setPasswordErrText] = useState("");
-
-  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const { username, password } = data; // react-hook-formによりdataオブジェクトから入力値を取得
-    //ログイン用APIを叩く
+  const onSubmit = async (data: any) => {
     try {
-      const res = await authApi.login({
-        username,
-        password,
-      });
-      localStorage.setItem("token", res.data.token);
-      router.push("/mypage");
-    } catch (err) {
-      // console.log(err);
-      const cherrors = (err as any).data.errors;
-      console.log(cherrors);
-      cherrors.forEach((e: any) => {
-        if (e.param === "username") {
-          setUsernameErrText(e.msg);
-        }
-        if (e.param === "password") {
-          setPasswordErrText(e.msg);
-        }
-      });
+      const newuser = await authApi.register(data);
+      localStorage.setItem("token", newuser.data.token);
+      console.log(newuser.data);
+      router.push("/admin/tasks");
+    } catch (error: any) {
+      console.error(error);
+      const errorMessage = error.data?.errors[0]?.msg;
+      console.log(errorMessage);
+      setErrorMessage(errorMessage); // エラーメッセージを更新
     }
   };
 
@@ -97,21 +78,30 @@ function Login() {
             className="p-2 mb-4 border border-gray-300 rounded focus:border-green-500 focus:ring-green-500"
             id="password"
           />
+
+          <label htmlFor="confirmPassword" className="mb-1">
+            確認用パスワード
+          </label>
+          <input
+            {...register("confirmPassword", {
+              required: "確認用パスワードは必須です",
+              validate: (value) =>
+                value === watch("password") || "確認用パスワードが一致しません",
+            })}
+            className="p-2 mb-4 border border-gray-300 rounded focus:border-green-500 focus:ring-green-500"
+            id="confirmPassword"
+          />
           <ErrorBox errors={errors} errorMessage={errorMessage} />
-          <p className="text-red-600">
-            {usernameErrText}
-            {passwordErrText}
-          </p>
           <input
             type="submit"
-            value="ログイン"
+            value="新規登録"
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2 w-[60%] mx-auto"
           />
         </div>
         <p className="text-sm mt-4">
-          アカウントを持っていませんか？
-          <Link href="/register" className="text-blue-500 underline">
-            新規登録
+          既に登録済みの方は
+          <Link href="/login" className="text-blue-500 underline">
+            ログインページ
           </Link>
           へ
         </p>
@@ -120,4 +110,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Resister;

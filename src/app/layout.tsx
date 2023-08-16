@@ -35,7 +35,7 @@ export default function RootLayout({
               <a href="/admin">
                 <h2 className={`mb-3 font-semibold text-center bg-slate-200`}>admin</h2>
               </a>
-              <a href="/mapage">
+              <a href="/mypage">
                 <h2 className={`mb-3 font-semibold text-center bg-slate-200`}>mypage</h2>
               </a>
             </div>
