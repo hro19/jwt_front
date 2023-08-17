@@ -1,5 +1,6 @@
 import './globals.css'
 import type { Metadata } from 'next'
+import Link from "next/link";
 import { Inter } from 'next/font/google'
 import AppProvider from "./provider";
 
@@ -29,20 +30,20 @@ export default function RootLayout({
               </a>
             </div>
             <div className="grid gap-1 text-center max-w-5xl w-full mb-0 mx-auto grid-cols-5 text-base lg:text-2xl">
-              <a href="/">
+              <Link href="/">
                 <h2 className={`mb-3 font-semibold text-center bg-slate-200`}>home</h2>
-              </a>
-              <a href="/admin">
+              </Link>
+              <Link href="/admin">
                 <h2 className={`mb-3 font-semibold text-center bg-slate-200`}>admin</h2>
-              </a>
-              <a href="/mypage">
+              </Link>
+              <Link href="/mypage">
                 <h2 className={`mb-3 font-semibold text-center bg-slate-200`}>mypage</h2>
-              </a>
-              <a href="/currency/php">
+              </Link>
+              <Link href="/currency/php">
                 <h2 className={`mb-3 font-semibold text-center bg-slate-200`}>
                   Currency_php
                 </h2>
-              </a>
+              </Link>
               <a href="/currency/jay">
                 <h2 className={`mb-3 font-semibold text-center bg-slate-200`}>
                   Currency_jay
