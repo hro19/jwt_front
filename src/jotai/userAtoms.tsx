@@ -3,3 +3,5 @@ import { atomWithReset } from "jotai/utils";
 import { User } from "../ts/User";
 
 export const userAtom = atomWithReset<User | null>(null);
+
+export const verifyUserAtom = atomWithReset<User | null>(null);

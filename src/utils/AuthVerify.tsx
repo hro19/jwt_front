@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import authUtils from "@/utils/authUtils";
 import { useRouter } from "next/navigation";
+import { useAtom } from "jotai";
+import { verifyUserAtom } from "@/jotai/userAtoms";
 
 const AuthVerify = () => {
+    const [verifyUser, setVerifyUser] = useAtom(verifyUserAtom);
 
   const router = useRouter();
   useEffect(() => {
@@ -11,9 +14,8 @@ const AuthVerify = () => {
       if (!isAuth) {
         router.push("/login");
       } else {
-        console.log("認証に大大大大大大成功");
-        const userId = isAuth.data.user._id;
-        return userId;
+        // console.log("認証に大大大大大大成功");
+        setVerifyUser(isAuth.data.user);
       }
     };
 
