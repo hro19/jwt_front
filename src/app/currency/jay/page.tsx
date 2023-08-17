@@ -1,7 +1,9 @@
 import React from "react";
 
 const getCurency = async () => {
-  const response = await fetch("https://www.floatrates.com/daily/jpy.json");
+  const response = await fetch("https://www.floatrates.com/daily/jpy.json", {
+    cache: "no-store",
+  });
   const phpCur = await response.json();
   return phpCur;
 };
