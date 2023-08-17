@@ -21,9 +21,8 @@ const AuthVerify = () => {
   }, []);
 
   return (
-    <div>
-      明日は天気
-    </div>
+    <>
+    </>
   )
 }
 

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import AuthVerify from "@/utils/authVerify";
+import AuthVerify from "@/utils/AuthVerify";
 
 const Verify = () => {
   return (
