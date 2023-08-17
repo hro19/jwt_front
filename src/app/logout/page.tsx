@@ -1,17 +1,17 @@
 "use client"
 
-import React from 'react'
+import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-const page = () => {
+const Page = () => {
+  const router = useRouter();
+
+  useEffect(() => {
     localStorage.removeItem("token");
-    const router = useRouter();
     router.push("/");
+  }, []);
 
-  return (
-    <>
-    </>
-  )
-}
+  return <></>;
+};
 
-export default page
+export default Page;
