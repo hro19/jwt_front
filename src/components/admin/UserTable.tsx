@@ -1,6 +1,12 @@
 import React from "react";
+import { User } from "@/ts/User";
 
-const UserTable = ({ user, handleDelete }: any) => {
+type UserTableProps = {
+  user: User;
+  handleDelete: (_id:string) => void;
+};
+
+const UserTable = ({ user, handleDelete }: UserTableProps) => {
   return (
     <div className="border rounded p-4 mb-4">
       <h2 className="text-lg font-semibold">{user._id}</h2>
