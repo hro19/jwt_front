@@ -21,12 +21,24 @@ export default function RootLayout({
       <html lang="en">
         <body className={inter.className}>
           <div className="flex flex-col justify-between mb-2">
-            <div className="flex justify-end space-x-2 my-1">
-              <Link href="/login" className="rounded-full border p-1 bg-lime-300">
-                <h2 className="text-center">login</h2>
+            <div className="flex justify-end space-x-2 my-1 mr-2">
+              <Link
+                href="/logout"
+                className="inline-flex items-center justify-center w-full px-4 py-2 text-base font-bold leading-6 text-white bg-indigo-600 border border-transparent rounded-full md:w-auto hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
+              >
+                <h2 className="text-center">ログアウト</h2>
               </Link>
-              <Link href="/register" className="rounded-full border p-1 bg-lime-300">
-                <h2 className="text-center">register</h2>
+              <Link
+                href="/login"
+                className="inline-flex items-center justify-center w-full px-4 py-2 text-base font-bold leading-6 text-white bg-indigo-600 border border-transparent rounded-full md:w-auto hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
+              >
+                <h2 className="text-center">ログイン</h2>
+              </Link>
+              <Link
+                href="/register"
+                className="inline-flex items-center justify-center w-full px-4 py-2 text-base font-bold leading-6 text-white bg-indigo-600 border border-transparent rounded-full md:w-auto hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
+              >
+                <h2 className="text-center">新規登録</h2>
               </Link>
             </div>
             <div className="grid gap-1 text-center max-w-5xl w-full mb-0 mx-auto grid-cols-5 text-base lg:text-2xl">
