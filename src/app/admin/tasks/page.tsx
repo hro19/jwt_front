@@ -4,6 +4,7 @@ import React from "react";
 import axios from "axios";
 // import { Task } from "../../ts/Task";
 import { useQuery, useMutation } from "react-query";
+import AuthVerify from "@/utils/AuthVerify";
 import TaskTable from "@/components/admin/TaskTable";
 
 const fetchTasks = async () => {
@@ -46,14 +47,17 @@ const Tasks = () => {
   }
 
   return (
-    <div className="container mx-auto my-4">
-      <h2 className="text-3xl font-bold text-center mb-4">タスク全一覧</h2>
-      <div className="grid gap-4 mx-2 grid-cols-1 lg:grid-cols-3 lg:mx-3">
-        {tasks.map((task: any) => (
-          <TaskTable task={task} handleDelete={handleDelete} key={task._id} />
-        ))}
+    <>
+      <AuthVerify />
+      <div className="container mx-auto my-4">
+        <h2 className="text-3xl font-bold text-center mb-4">タスク全一覧</h2>
+        <div className="grid gap-4 mx-2 grid-cols-1 lg:grid-cols-3 lg:mx-3">
+          {tasks.map((task: any) => (
+            <TaskTable task={task} handleDelete={handleDelete} key={task._id} />
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
