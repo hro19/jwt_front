@@ -29,7 +29,7 @@ const AdminUsers = () => {
     }
   );
 
-  const handleDelete = async (userId: any) => {
+  const handleDelete = async (userId: any):Promise<void> => {
     try {
       await deleteUserMutation.mutateAsync(userId);
     } catch (error) {
