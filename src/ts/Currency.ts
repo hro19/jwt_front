@@ -13,7 +13,7 @@ export type CurrencyObj = {
 };
 
 //メインで使う要素だけを取り出す
-type CurrencyMainUnion = "code" | "name" | "rate" | "inverseRate";
+type CurrencyMainUnion = "code" | "name" | "rate" | "date" | "inverseRate";
 export type CurrencyMain = Pick<Currency, CurrencyMainUnion>;
 
 //メインで使う要素+日本語訳を付ける

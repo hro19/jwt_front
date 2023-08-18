@@ -7,6 +7,6 @@ export const currencyObjAtom = atomWithReset<CurrencyObj | null>(null);
 
 
 //選択可能な国 通貨コードの小文字で表記
-export const AbleChooseCountries = ["jpy", "usd", "cny", "twd", "php", "thb", "aud"];
+export const AbleChooseCountries = ["jpy", "usd", "cny", "twd", "php", "thb", "vnd", "aud"];
 
 export const CouCurrncyAtom = atomWithReset<Currency[] | null>(null);
