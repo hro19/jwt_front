@@ -9,13 +9,13 @@ import {
   CouCurrncyAtom,
 } from "@/jotai/curracyAtoms";
 
-const CurrencyWrap = ({ currencyObjData }: CurrencyObj) => {
+const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
   const [couCurrncy, setCouCurrncy] = useAtom(CouCurrncyAtom);
 
   useEffect(() => {
     const filteredCurrenciesArray: Currency[] = Object.entries(currencyObjData)
       .filter(([currencyCode]) => AbleChooseCountries.includes(currencyCode))
-      .map(([, currencyInfo]) => currencyInfo as unknown as Currency); // 明示的な型変換
+      .map(([, currencyInfo]) => currencyInfo); // 明示的な型変換
     console.table(filteredCurrenciesArray);
     setCouCurrncy(filteredCurrenciesArray);
   }, [currencyObjData]);

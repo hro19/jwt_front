@@ -9,7 +9,7 @@ export type Currency = {
 };
 
 export type CurrencyObj = {
-  [currencyCode: string]: Partial<Currency>;
+  [currencyCode: string]: Currency;
 };
 
 //メインで使う要素だけを取り出す
