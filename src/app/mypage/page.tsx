@@ -5,8 +5,9 @@ import axios from "axios";
 import AuthVerify from "@/utils/AuthVerify";
 import { useAtom } from "jotai";
 import { verifyUserAtom } from "@/jotai/userAtoms";
+import { Task } from "@/ts/Task";
 
-const fetchUserTasks = async (userId: string) => {
+const fetchUserTasks = async (userId: string):Promise<Task[]> => {
   try {
     const response = await axios.get(
       `https://jwt-mongo.vercel.app/api/v1/tasks/${userId}/usertasks`
@@ -18,8 +19,8 @@ const fetchUserTasks = async (userId: string) => {
 };
 
 const Verify = () => {
-  const [tasks, setTasks] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [verifyUser, setVerifyUser] = useAtom(verifyUserAtom);
 
   useEffect(() => {
