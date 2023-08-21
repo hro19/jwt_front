@@ -8,6 +8,7 @@ export const currencyObjAtom = atomWithReset<CurrencyObj | null>(null);
 
 //選択可能な国 通貨コードの小文字で表記
 export const AbleChooseCountries = ["jpy", "usd", "cny", "twd", "php", "thb", "vnd", "aud"];
+export const CurrencyJaName = ["日本円", "アメリカドル", "中国人民元", "ニュー台湾ドル", "フィリピンペソ", "タイバーツ", "ベトナムドン", "オーストラリアドル"];
 
 //オリジナルの通貨データから項目を絞り込む
 export const currencyMainKey: (keyof Currency)[] = [
