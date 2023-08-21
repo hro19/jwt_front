@@ -12,10 +12,6 @@ export type CurrencyObj = {
   [currencyCode: string]: Currency;
 };
 
-//メインで使う要素だけを取り出す
-type CurrencyMainUnion = "code" | "name" | "rate" | "date" | "inverseRate";
-export type CurrencyMain = Pick<Currency, CurrencyMainUnion>;
-
 //メインで使う要素+日本語訳を付ける
 // jp_codeがJPY → 日本　　　　jp_codeがUSD → アメリカ合衆国
 // jp_nameがJapanese Yen → 円　　　jp_nameがu.s Dollar → ドル
