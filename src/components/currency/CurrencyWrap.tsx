@@ -6,6 +6,7 @@ import { useAtom } from "jotai";
 import {
   AbleChooseCountries,
   CouCurrncyAtom,
+  currencyJaName,
 } from "@/jotai/curracyAtoms";
 
 //連想配列から配列に変換する関数
@@ -30,6 +31,7 @@ const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => 
 
   // CurrencyWrapコンポーネント内でのuseEffectの中身
   useEffect(() => {
+    // console.log(currencyJaName);
     const associativeConvertArr: Currency[] = AssociativeConvert(currencyObjData);
 
     // AbleChooseCountriesでフィルタリングする関数を呼び出す
@@ -38,7 +40,7 @@ const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => 
       AbleChooseCountries
     );
 
-    console.table(filteredCurrenciesArray);
+    //console.table(filteredCurrenciesArray);
     setCouCurrncy(filteredCurrenciesArray);
   }, [currencyObjData]);
 
@@ -49,7 +51,8 @@ const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => 
           couCurrncy.map((currencyInfo: Currency, index: number) => (
             <li key={index}>
               <p>
-                【コード】{currencyInfo.code} -【名前】{currencyInfo.name}
+                【コード】{currencyInfo.code} -【名前】{currencyInfo.name}<br />
+                【日本語で通貨】{currencyJaName[currencyInfo.code]}
               </p>
               <p>【レート】{currencyInfo.rate}</p>
               <p>【日付】{currencyInfo.date.toString()}</p>
