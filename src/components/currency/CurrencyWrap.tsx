@@ -8,6 +8,7 @@ import {
   CouCurrncyAtom,
   currencyJaName,
 } from "@/jotai/curracyAtoms";
+import { dateUntilFun } from "@/utils/dateFns";
 
 //連想配列から配列に変換する関数
 const AssociativeConvert = (currencyObjData: CurrencyObj): Currency[] => {
@@ -51,11 +52,12 @@ const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => 
           couCurrncy.map((currencyInfo: Currency, index: number) => (
             <li key={index}>
               <p>
-                【コード】{currencyInfo.code} -【名前】{currencyInfo.name}<br />
+                【コード】{currencyInfo.code} -【名前】{currencyInfo.name}
+                <br />
                 【日本語で通貨】{currencyJaName[currencyInfo.code]}
               </p>
               <p>【レート】{currencyInfo.rate}</p>
-              <p>【日付】{currencyInfo.date.toString()}</p>
+              <p>【日付】{dateUntilFun(currencyInfo.date)}</p>
               <p>【両替レート】{currencyInfo.inverseRate}</p>
               <hr />
             </li>
