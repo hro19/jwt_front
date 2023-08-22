@@ -53,12 +53,8 @@ const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => 
             <li key={index}>
               <p>
                 【コード】{currencyInfo.code} -【名前】{currencyInfo.name}(
-<<<<<<< HEAD
                 <span className="text-lime-600">{currencyJaName[currencyInfo.code]}</span>
                 )
-=======
-                {currencyJaName[currencyInfo.code]})
->>>>>>> ae6f36e421338f48061bf1c232411bfcefc68c02
               </p>
               <p>【レート】{currencyInfo.rate.toFixed(6)}</p>
               <p>【日付】{dateUntilFun(currencyInfo.date)}</p>
