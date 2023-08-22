@@ -9,23 +9,10 @@ import {
   currencyJaName,
 } from "@/jotai/curracyAtoms";
 import { dateUntilFun } from "@/utils/dateFns";
-
-//連想配列から配列に変換する関数
-const AssociativeConvert = (currencyObjData: CurrencyObj): Currency[] => {
-  return Object.values(currencyObjData);
-};
-
-// AbleChooseCountriesでフィルタリングする関数を定義
-const filterAbleChooseCountries = (
-  Currencys: Currency[],
-  AbleChooseCountries: string[]
-): Currency[] => {
-  const upperCaseChooseCountries = AbleChooseCountries.map((code) => code.toUpperCase());
-
-  return Currencys.filter((currencyInfo) =>
-    upperCaseChooseCountries.includes(currencyInfo.code)
-  );
-};
+import {
+  AssociativeConvert,
+  FilterAbleChooseCountries,
+} from "@/features/currency/currencyConvertArr";
 
 const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
   const [couCurrncy, setCouCurrncy] = useAtom(CouCurrncyAtom);
@@ -36,7 +23,7 @@ const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => 
     const associativeConvertArr: Currency[] = AssociativeConvert(currencyObjData);
 
     // AbleChooseCountriesでフィルタリングする関数を呼び出す
-    const filteredCurrenciesArray = filterAbleChooseCountries(
+    const filteredCurrenciesArray = FilterAbleChooseCountries(
       associativeConvertArr,
       AbleChooseCountries
     );
