@@ -52,13 +52,12 @@ const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => 
           couCurrncy.map((currencyInfo: Currency, index: number) => (
             <li key={index}>
               <p>
-                【コード】{currencyInfo.code} -【名前】{currencyInfo.name}
-                <br />
-                【日本語で通貨】{currencyJaName[currencyInfo.code]}
+                【コード】{currencyInfo.code} -【名前】{currencyInfo.name}(
+                {currencyJaName[currencyInfo.code]})
               </p>
-              <p>【レート】{currencyInfo.rate}</p>
+              <p>【レート】{currencyInfo.rate.toFixed(6)}</p>
               <p>【日付】{dateUntilFun(currencyInfo.date)}</p>
-              <p>【両替レート】{currencyInfo.inverseRate}</p>
+              <p>【両替レート】{currencyInfo.inverseRate.toFixed(6)}</p>
               <hr />
             </li>
           ))}
