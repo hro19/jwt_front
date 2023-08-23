@@ -27,4 +27,4 @@ export const currencyMainKey: (keyof Currency)[] = [
   "code","name","rate","date","inverseRate"];
 
 
-export const CouCurrncyAtom = atomWithReset<Currency []| null>(null);
+export const CouCurrncyAtom = atomWithReset<any | null>(null);
