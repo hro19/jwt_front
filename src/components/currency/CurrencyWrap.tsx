@@ -9,27 +9,19 @@ import {
   currencyJaName,
 } from "@/jotai/curracyAtoms";
 import { dateUntilFun } from "@/utils/dateFns";
-import {
-  AssociativeConvert,
-  FilterAbleChooseCountries,
-} from "@/features/currency/currencyConvertArr";
+import { ChooseCountry } from "@/features/currency/currencyConvertArr";
 
 const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
   const [couCurrncy, setCouCurrncy] = useAtom(CouCurrncyAtom);
 
   // CurrencyWrapコンポーネント内でのuseEffectの中身
   useEffect(() => {
-    // console.log(currencyJaName);
-    const associativeConvertArr: Currency[] = AssociativeConvert(currencyObjData);
-
-    // AbleChooseCountriesでフィルタリングする関数を呼び出す
-    const filteredCurrenciesArray = FilterAbleChooseCountries(
-      associativeConvertArr,
+    const chooseCountry: ReturnType<typeof ChooseCountry> = ChooseCountry(
+      currencyObjData,
       AbleChooseCountries
     );
-
-    //console.table(filteredCurrenciesArray);
-    setCouCurrncy(filteredCurrenciesArray);
+    //console.table(chooseCountry);
+    setCouCurrncy(chooseCountry);
   }, [currencyObjData]);
 
   return (
