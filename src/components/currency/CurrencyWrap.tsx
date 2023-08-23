@@ -5,15 +5,20 @@ import { Currency, CurrencyObj } from "@/ts/Currency";
 import { useAtom } from "jotai";
 import {
   AbleChooseCountries,
-  currencyObjAtom,
   CouCurrncyAtom,
 } from "@/jotai/curracyAtoms";
+import { ChooseCountry } from "@/features/currency/chooseCountry";
 
 const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
   const [couCurrncy, setCouCurrncy] = useAtom(CouCurrncyAtom);
 
   useEffect(() => {
-    const filteredCurrenciesArray: any = currencyObjData;
+    // AbleChooseCountriesに含まれる通貨コードのみを含む新しいオブジェクトを作成
+    const filteredCurrenciesArray: CurrencyObj = ChooseCountry(
+      currencyObjData,
+      AbleChooseCountries
+    );
+
     console.table(filteredCurrenciesArray);
     setCouCurrncy(filteredCurrenciesArray);
   }, [currencyObjData]);
