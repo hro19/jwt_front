@@ -9,11 +9,11 @@ import {
   CouCurrncyAtom,
 } from "@/jotai/curracyAtoms";
 
-const CurrencyWrap = ({ currencyObjData }: CurrencyObj) => {
+const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
   const [couCurrncy, setCouCurrncy] = useAtom(CouCurrncyAtom);
 
   useEffect(() => {
-    const filteredCurrenciesArray:any = currencyObjData
+    const filteredCurrenciesArray: any = currencyObjData;
     console.table(filteredCurrenciesArray);
     setCouCurrncy(filteredCurrenciesArray);
   }, [currencyObjData]);
