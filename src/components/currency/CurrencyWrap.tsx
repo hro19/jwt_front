@@ -25,14 +25,22 @@ const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => 
 
   return (
     <>
-      <ul>
-        {couCurrncy && (
-          <li key={couCurrncy["php"].code}>
+      <div className="mx-auto w-full max-w-[860px]">
+        <div className="flex">
+          <div className="w-full bg-cyan-100">
+            <h2>フィリピンペソのコンテンツ</h2>
+          </div>
+          <div className="w-full bg-fuchsia-100">
+            <h2>日本円のコンテンツ</h2>
+          </div>
+        </div>
+      </div>
+      {/* {couCurrncy && (
+          <p key={couCurrncy["php"].code}>
             <strong>{couCurrncy["php"].code}</strong> - {couCurrncy["php"].name} (
             {couCurrncy["php"].rate})
-          </li>
-        )}
-      </ul>
+          </p>
+        )} */}
     </>
   );
 };
