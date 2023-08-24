@@ -29,42 +29,40 @@ const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => 
   return (
     <>
       {couCurrncy && (
-
-          <div className="flex">
-            <div className="relative w-full bg-cyan-100 px-4 pb-12 pt-2">
-              <i className="absolute -top-8 -left-3">
-                <Image
-                  src="/country/php.png"
-                  alt="交換元通貨のフラグ"
-                  width={100}
-                  height={70}
-                  priority
-                />
-              </i>
-              <h2 className="text-md font-bold text-right">
-                {/* {couCurrncy["php"].code}のコンテンツ */}
-                {currencyJaName[couCurrncy["php"].code]}
-              </h2>
-              <section className="text-center">
-                <h3>レート:</h3>
-                <p className="text-xs">
-                  更新日（{dateUntilFun(couCurrncy["php"].date)}）
-                </p>
-              </section>
-            </div>
-            <div className="relative w-full bg-fuchsia-100 px-4 pb-12 pt-2">
-              <i className="absolute -top-8 -left-3">
-                <Image
-                  src="/country/jpy.png"
-                  alt="交換目的通貨のフラグ"
-                  width={100}
-                  height={70}
-                  priority
-                />
-              </i>
-              <h2 className="text-md font-bold text-right">日本円のコンテンツ</h2>
-            </div>
+        <div className="flex">
+          <div className="relative w-full bg-cyan-100 px-4 pb-12 pt-2">
+            <i className="absolute -top-8 -left-3">
+              <Image
+                src="/country/php.png"
+                alt="交換元通貨のフラグ"
+                width={100}
+                height={70}
+                priority
+              />
+            </i>
+            <h2 className="text-md font-bold text-right">
+              {/* {couCurrncy["php"].code}のコンテンツ */}
+              {currencyJaName[couCurrncy["php"].code]}
+            </h2>
+            <section className="text-center">
+              <h3>レート:{couCurrncy["php"].inverseRate.toFixed(5)}</h3>
+              <p className="text-xs">更新日（{dateUntilFun(couCurrncy["php"].date)}）</p>
+              <input type="text" id="calculation" className="my-4 text-2xl" />
+            </section>
           </div>
+          <div className="relative w-full bg-fuchsia-100 px-4 pb-12 pt-2">
+            <i className="absolute -top-8 -left-3">
+              <Image
+                src="/country/jpy.png"
+                alt="交換目的通貨のフラグ"
+                width={100}
+                height={70}
+                priority
+              />
+            </i>
+            <h2 className="text-md font-bold text-right">日本円のコンテンツ</h2>
+          </div>
+        </div>
       )}
     </>
   );
