@@ -6,11 +6,13 @@ import React, { useState, FormEvent } from "react";
 
 type Calculation = {
   base_value: number;
+  calculate_value: number;
 };
 
 const page = () => {
   const [calculation, setCalculation] = useState<Calculation>({
     base_value: 0,
+    calculate_value:0,
   });
 
   const onChangeHandler = (value: string) => {
@@ -23,7 +25,12 @@ const page = () => {
   };
 
   const setBaseValue = (value: number) => {
-    setCalculation({ base_value: value });
+    // 新しいオブジェクトを作成して base_value を更新
+    const newCalculation: Calculation = {
+      ...calculation,
+      base_value: value,
+    };
+    setCalculation(newCalculation);
   };
 
   const handleSubmit = (e: FormEvent) => {
