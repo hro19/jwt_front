@@ -9,10 +9,12 @@ type Calculation = {
   calculate_value: number;
 };
 
+const RatePhp = 2.4141; //レートの定数値
+
 const page = () => {
   const [calculation, setCalculation] = useState<Calculation>({
     base_value: 0,
-    calculate_value:0,
+    calculate_value: 0,
   });
 
   const onChangeHandler = (value: string) => {
@@ -20,15 +22,17 @@ const page = () => {
       String.fromCharCode(s.charCodeAt(0) - 0xfee0)
     );
     if (!isNaN(Number(v))) {
-     setBaseValue(Number(v)); // 関数名を修正
+      setBaseValue(Number(v)); // 関数名を修正
     }
   };
 
   const setBaseValue = (value: number) => {
     // 新しいオブジェクトを作成して base_value を更新
+
     const newCalculation: Calculation = {
       ...calculation,
       base_value: value,
+      calculate_value: RatePhp * value,
     };
     setCalculation(newCalculation);
   };
@@ -57,5 +61,4 @@ const page = () => {
   );
 };
 
-export default page
-
+export default page;
