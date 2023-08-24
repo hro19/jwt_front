@@ -6,8 +6,11 @@ import { useAtom } from "jotai";
 import {
   AbleChooseCountries,
   CouCurrncyAtom,
+  currencyJaName
 } from "@/jotai/curracyAtoms";
 import { ChooseCountry } from "@/features/currency/chooseCountry";
+import Image from "next/image";
+import { dateUntilFun } from "@/utils/dateFns";
 
 const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
   const [couCurrncy, setCouCurrncy] = useAtom(CouCurrncyAtom);
@@ -25,22 +28,44 @@ const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => 
 
   return (
     <>
-      <div className="mx-auto w-full max-w-[860px]">
-        <div className="flex">
-          <div className="w-full bg-cyan-100">
-            <h2>フィリピンペソのコンテンツ</h2>
+      {couCurrncy && (
+
+          <div className="flex">
+            <div className="relative w-full bg-cyan-100 px-4 pb-12 pt-2">
+              <i className="absolute -top-8 -left-3">
+                <Image
+                  src="/country/php.png"
+                  alt="交換元通貨のフラグ"
+                  width={100}
+                  height={70}
+                  priority
+                />
+              </i>
+              <h2 className="text-md font-bold text-right">
+                {/* {couCurrncy["php"].code}のコンテンツ */}
+                {currencyJaName[couCurrncy["php"].code]}
+              </h2>
+              <section className="text-center">
+                <h3>レート:</h3>
+                <p className="text-xs">
+                  更新日（{dateUntilFun(couCurrncy["php"].date)}）
+                </p>
+              </section>
+            </div>
+            <div className="relative w-full bg-fuchsia-100 px-4 pb-12 pt-2">
+              <i className="absolute -top-8 -left-3">
+                <Image
+                  src="/country/jpy.png"
+                  alt="交換目的通貨のフラグ"
+                  width={100}
+                  height={70}
+                  priority
+                />
+              </i>
+              <h2 className="text-md font-bold text-right">日本円のコンテンツ</h2>
+            </div>
           </div>
-          <div className="w-full bg-fuchsia-100">
-            <h2>日本円のコンテンツ</h2>
-          </div>
-        </div>
-      </div>
-      {/* {couCurrncy && (
-          <p key={couCurrncy["php"].code}>
-            <strong>{couCurrncy["php"].code}</strong> - {couCurrncy["php"].name} (
-            {couCurrncy["php"].rate})
-          </p>
-        )} */}
+      )}
     </>
   );
 };

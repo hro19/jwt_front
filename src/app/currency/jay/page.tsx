@@ -14,8 +14,8 @@ const UsersList = async () => {
   const currencyObjData = await getCurency();
 
   return (
-    <div>
-      <h2 className="text-lg font-bold mt-4">日本から見た通貨一覧</h2>
+    <div className="mx-auto w-full max-w-[860px] py-8">
+      <h2 className="text-center text-lg font-bold mb-12">日本円への通貨計算</h2>
       <CurrencyWrap currencyObjData={currencyObjData} />
     </div>
   );
