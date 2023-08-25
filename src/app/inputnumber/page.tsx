@@ -11,7 +11,7 @@ type Calculation = {
 
 const RatePhp = 2.4141; //レートの定数値
 
-const page = () => {
+const Page = () => {
   const [calculation, setCalculation] = useState<Calculation>({
     base_value: 0,
     calculate_value: 0,
@@ -61,4 +61,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
