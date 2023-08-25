@@ -42,11 +42,16 @@ const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => 
             </i>
             <section className="text-center">
               <h3>
-                {currencyJaName[couCurrncy["php"].code]}のレート<br />
+                {currencyJaName[couCurrncy["php"].code]}のレート
+                <br />
                 {couCurrncy["php"].inverseRate.toFixed(5)}
               </h3>
               <p className="text-xs">更新日（{dateUntilFun(couCurrncy["php"].date)}）</p>
-              <input type="text" id="calculation" className="my-4 text-2xl" />
+              <input
+                type="text"
+                id="calculation"
+                className="my-4 text-2xl border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
             </section>
           </div>
           <div className="relative w-full bg-fuchsia-100 px-4 py-12">
