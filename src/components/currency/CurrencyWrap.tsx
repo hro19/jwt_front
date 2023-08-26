@@ -13,6 +13,7 @@ import Image from "next/image";
 import { dateUntilFun } from "@/utils/dateFns";
 
 const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
+  // console.log("🚀 ~ file: CurrencyWrap.tsx:16 ~ CurrencyWrap ~ currencyObjData:", currencyObjData)
   const [couCurrncy, setCouCurrncy] = useAtom(CouCurrncyAtom);
 
   useEffect(() => {
