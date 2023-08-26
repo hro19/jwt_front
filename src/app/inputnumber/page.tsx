@@ -27,13 +27,13 @@ const Page = () => {
   };
 
   const setBaseValue = (value: number) => {
-    // 新しいオブジェクトを作成して base_value を更新
-
+    // イミュータブルな操作でオブジェクトを作成する
     const newCalculation: Calculation = {
       ...calculation,
       base_value: value,
       calculate_value: RatePhp * value,
     };
+    // console.log("newCalculation:", newCalculation);
     setCalculation(newCalculation);
   };
 
