@@ -47,10 +47,20 @@ const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => 
                 <br />
                 {couCurrncy["php"].inverseRate.toFixed(5)}
               </h3>
-              <p className="text-xs">更新日（{dateUntilFun(couCurrncy["php"].date)}）</p>
+              <span className="text-xs block">
+                更新日（{dateUntilFun(couCurrncy["php"].date)}）
+              </span>
+
               <input
                 type="text"
-                id="calculation"
+                id="name"
+                placeholder="商品名"
+                className="my-4 text-2xl border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <input
+                type="text"
+                id="local_price"
+                placeholder="商品現地価格"
                 className="my-4 text-2xl border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </section>
@@ -76,6 +86,36 @@ const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => 
           </div>
         </div>
       )}
+      <div className="flex justify-center mt-10 mx-auto">
+        <table className="table-auto border-collapse border border-gray-300">
+          <thead>
+            <tr className="bg-gray-100">
+              <th className="px-4 py-2">商品名</th>
+              <th className="px-4 py-2">国名</th>
+              <th className="px-4 py-2">レート計算日時</th>
+              <th className="px-4 py-2">現地価格</th>
+              <th className="px-4 py-2">日本円価格</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td className="border px-4 py-2">Product A</td>
+              <td className="border px-4 py-2">USD</td>
+              <td className="border px-4 py-2">2023-08-25 12:00:00</td>
+              <td className="border px-4 py-2">$100.00</td>
+              <td className="border px-4 py-2">¥11,000.00</td>
+            </tr>
+            <tr>
+              <td className="border px-4 py-2">Product B</td>
+              <td className="border px-4 py-2">EUR</td>
+              <td className="border px-4 py-2">2023-08-25 13:30:00</td>
+              <td className="border px-4 py-2">$75.50</td>
+              <td className="border px-4 py-2">¥9,000.00</td>
+            </tr>
+            {/* Add more rows as needed */}
+          </tbody>
+        </table>
+      </div>
     </>
   );
 };
