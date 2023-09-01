@@ -1,20 +1,18 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { Currency, CurrencyObj } from "@/ts/Currency";
 import { useAtom } from "jotai";
-import {
-  AbleChooseCountries,
-  CouCurrncyAtom,
-  currencyJaName
-} from "@/jotai/curracyAtoms";
+import {CouCurrncyAtom} from "@/jotai/curracyAtoms";
+import { AbleChooseCountries } from "@/constants/Currency";
 import { ChooseCountry } from "@/features/currency/chooseCountry";
 import Image from "next/image";
-import { dateUntilFun } from "@/utils/dateFns";
+import { customCurrency } from "@/class/customCurrency";
 
 const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
   // console.log("🚀 ~ file: CurrencyWrap.tsx:16 ~ CurrencyWrap ~ currencyObjData:", currencyObjData)
   const [couCurrncy, setCouCurrncy] = useAtom(CouCurrncyAtom);
+  const [phpCurrency, setPhpCurrency] = useState<customCurrency | null>(null);
 
   useEffect(() => {
     // AbleChooseCountriesに含まれる通貨コードのみを含む新しいオブジェクトを作成
@@ -23,13 +21,22 @@ const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => 
       AbleChooseCountries
     );
 
-    console.table(filteredCurrenciesArray);
+    //console.table(filteredCurrenciesArray);
     setCouCurrncy(filteredCurrenciesArray);
   }, [currencyObjData]);
 
+  useEffect(() => {
+    if (couCurrncy !== null) {
+      const phpCur = new customCurrency(couCurrncy["php"]);
+      console.log("🚀 ~ file: CurrencyWrap.tsx:31 ~ useEffect ~ const:", phpCur);
+      setPhpCurrency(phpCur);
+    }
+  }, [couCurrncy]);
+
+
   return (
     <>
-      {couCurrncy && (
+      {phpCurrency && (
         <div className="flex">
           <div className="relative w-full bg-cyan-100 px-4 py-12">
             <i className="absolute top-3 left-2">
@@ -42,14 +49,12 @@ const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => 
               />
             </i>
             <section className="text-center">
-              <h3>
-                {currencyJaName[couCurrncy["php"].code]}のレート
+              <h3 className="text-lg font-bold">
+                {phpCurrency.getCurrencyJaName()}のレート
                 <br />
-                {couCurrncy["php"].inverseRate.toFixed(5)}
+                {phpCurrency.inverseRate.toString()}
               </h3>
-              <span className="text-xs block">
-                更新日（{dateUntilFun(couCurrncy["php"].date)}）
-              </span>
+              <span className="text-xs block">更新日（{phpCurrency.getDateFun()}）</span>
 
               <input
                 type="text"
