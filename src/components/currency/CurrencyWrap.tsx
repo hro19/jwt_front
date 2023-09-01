@@ -28,7 +28,7 @@ const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => 
   useEffect(() => {
     if (couCurrncy !== null) {
       const phpCur = new customCurrency(couCurrncy["php"]);
-      console.log("🚀 ~ file: CurrencyWrap.tsx:31 ~ useEffect ~ const:", phpCur);
+      // console.log("🚀 ~ file: CurrencyWrap.tsx:31 ~ useEffect ~ const:", phpCur);
       setPhpCurrency(phpCur);
     }
   }, [couCurrncy]);
