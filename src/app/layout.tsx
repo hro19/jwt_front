@@ -41,26 +41,24 @@ export default function RootLayout({
                 <h2 className="text-center">新規登録</h2>
               </Link>
             </div>
-            <div className="grid gap-1 text-center max-w-5xl w-full mb-0 mx-auto grid-cols-5 text-base lg:text-2xl">
-              <Link href="/">
-                <h2 className={`mb-3 font-semibold text-center bg-slate-200`}>home</h2>
-              </Link>
-              <Link href="/admin">
-                <h2 className={`mb-3 font-semibold text-center bg-slate-200`}>admin</h2>
-              </Link>
-              <Link href="/mypage">
-                <h2 className={`mb-3 font-semibold text-center bg-slate-200`}>mypage</h2>
-              </Link>
-              <Link href="/currency/php">
-                <h2 className={`mb-3 font-semibold text-center bg-slate-200`}>
-                  Currency_php
-                </h2>
-              </Link>
-              <Link href="/currency/jay">
-                <h2 className={`mb-3 font-semibold text-center bg-slate-200`}>
-                  Currency_jay
-                </h2>
-              </Link>
+            <div className="bg-slate-200 py-2 mb-3">
+              <div className="grid gap-1 text-center max-w-5xl w-full mx-auto grid-cols-5 text-base lg:text-xl">
+                <Link href="/">
+                  <h2 className={`font-semibold text-center`}>home</h2>
+                </Link>
+                <Link href="/admin">
+                  <h2 className={`font-semibold text-center`}>admin</h2>
+                </Link>
+                <Link href="/mypage">
+                  <h2 className={`font-semibold text-center`}>mypage</h2>
+                </Link>
+                <Link href="/currency/php">
+                  <h2 className={`font-semibold text-center`}>Currency_php</h2>
+                </Link>
+                <Link href="/currency/jay">
+                  <h2 className={`font-semibold text-center`}>Currency_jay</h2>
+                </Link>
+              </div>
             </div>
           </div>
           <div className="mx-auto px-4">{children}</div>
