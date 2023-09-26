@@ -1,5 +1,5 @@
 import React from "react";
-import { User } from "@/ts/User";
+import { User } from "../../ts/User";
 
 type UserTableProps = {
   user: User;

@@ -1,3 +1,4 @@
+import React from "react";
 import Link from "next/link";
 
 const uMenus = [
@@ -28,7 +29,8 @@ const UtilityMenu = () => {
     <div className="bg-slate-200 py-2 mb-3">
       <div className="grid gap-1 text-center max-w-5xl w-full mx-auto grid-cols-5 text-base lg:text-xl">
         {uMenus.map((menu, index) => (
-          <Link key={index} href={menu.href} className={`font-semibold text-center`}>{menu.text}
+          <Link key={index} href={menu.href} className={`font-semibold text-center`}>
+            {menu.text}
           </Link>
         ))}
       </div>
