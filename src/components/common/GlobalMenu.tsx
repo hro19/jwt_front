@@ -26,10 +26,14 @@ const gMenus = [
 
 const GlobalMenu = () => {
   return (
-    <div className="bg-slate-200 py-2 mb-3">
+    <div className="bg-slate-200 mb-3">
       <div className="grid gap-1 text-center max-w-5xl w-full mx-auto grid-cols-5 text-base lg:text-xl">
         {gMenus.map((menu, index) => (
-          <Link key={index} href={menu.href} className={`font-semibold text-center`}>
+          <Link
+            key={index}
+            href={menu.href}
+            className={`font-semibold text-center py-2`}
+          >
             {menu.text}
           </Link>
         ))}
