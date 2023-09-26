@@ -3,37 +3,31 @@ import Link from "next/link";
 
 const uMenus = [
   {
-    href: "/",
-    text: "ホーム",
+    href: "/logout",
+    text: "ログアウト",
   },
   {
-    href: "/admin",
-    text: "管理者用",
+    href: "/login",
+    text: "ログイン",
   },
   {
-    href: "/mypage",
-    text: "マイページ",
-  },
-  {
-    href: "/currency/php",
-    text: "Ph通貨",
-  },
-  {
-    href: "/currency/jay",
-    text: "通貨計算",
+    href: "/register",
+    text: "新規登録",
   },
 ];
 
 const UtilityMenu = () => {
   return (
-    <div className="bg-slate-200 py-2 mb-3">
-      <div className="grid gap-1 text-center max-w-5xl w-full mx-auto grid-cols-5 text-base lg:text-xl">
-        {uMenus.map((menu, index) => (
-          <Link key={index} href={menu.href} className={`font-semibold text-center`}>
-            {menu.text}
-          </Link>
-        ))}
-      </div>
+    <div className="flex justify-end space-x-2 my-1 mr-2">
+      {uMenus.map((menu, index) => (
+        <Link
+          key={index}
+          href={menu.href}
+          className="inline-flex items-center justify-center w-full px-4 py-2 text-base font-bold leading-6 text-white bg-indigo-600 border border-transparent rounded-full md:w-auto hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
+        >
+          <h2 className="text-center">{menu.text}</h2>
+        </Link>
+      ))}
     </div>
   );
 };
