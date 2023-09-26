@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const adminMenu = () => {
+const AdminMenu = () => {
       const pathname = usePathname();
 
       const adminSubmenus = [
@@ -42,4 +42,4 @@ const adminMenu = () => {
   );
 }
 
-export default adminMenu
+export default AdminMenu

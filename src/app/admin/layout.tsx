@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import AdminMenu from "@/components/common/adminMenu";
+import AdminMenu from "@/components/common/AdminMenu";
 
 export const metadata: Metadata = {
   title: "グローバルチェッカー",
