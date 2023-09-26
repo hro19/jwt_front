@@ -6,11 +6,9 @@ import { useQuery, useMutation } from "react-query";
 import AuthVerify from "@/utils/AuthVerify";
 import UserTable from "@/components/admin/UserTable";
 import { User } from "@/ts/User";
+import { getApiAllUsers } from "@/api/user/getApiAllUsers";
 
-const fetchUsers = async (): Promise<User[]> => {
-  const response = await axios.get("https://jwt-mongo.vercel.app/api/v1/users");
-  return response.data;
-};
+const fetchUsers = getApiAllUsers;
 
 const useUsersQuery = () => {
   return useQuery("users", fetchUsers);
