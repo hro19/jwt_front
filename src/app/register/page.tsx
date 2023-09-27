@@ -22,7 +22,7 @@ function Resister() {
       const newuser = await authApi.register(data);
       localStorage.setItem("token", newuser.data.token);
       console.log(newuser.data);
-      router.push("/admin/tasks");
+      router.push("/admin/users");
     } catch (error: any) {
       console.error(error);
       const errorMessage = error.data?.errors[0]?.msg;

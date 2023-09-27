@@ -3,15 +3,17 @@
 import React from "react";
 import axios from "axios";
 // import { Task } from "../../ts/Task";
-import { useQuery, useMutation } from "react-query";
+import { useQuery, useMutation, QueryClient } from "@tanstack/react-query";
 import AuthVerify from "@/utils/AuthVerify";
 import TaskTable from "@/components/admin/TaskTable";
 import { getApiAllTasks } from "@/api/task/getApiAllTasks";
 
 const fetchTasks = getApiAllTasks;
 
-const useTasksQuery = () => {
-  return useQuery("tasks", fetchTasks);
+const queryClient = new QueryClient();
+
+const useTasksQuery:any = () => {
+  return useQuery({ queryKey: ["tasks"], queryFn: fetchTasks });
 };
 
 const Tasks = () => {
@@ -23,7 +25,7 @@ const Tasks = () => {
     {
       onSuccess: () => {
         // データの削除後にタスク一覧を再取得する
-        refetch();
+        queryClient.invalidateQueries({ queryKey: ["tasks"] });
       },
     }
   );

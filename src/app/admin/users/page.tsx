@@ -2,7 +2,7 @@
 
 import React from "react";
 import axios from "axios";
-import { useQuery, useMutation } from "react-query";
+import { useQuery, useMutation, QueryClient } from "@tanstack/react-query";
 import AuthVerify from "@/utils/AuthVerify";
 import UserTable from "@/components/admin/UserTable";
 import { User } from "@/ts/User";
@@ -10,21 +10,24 @@ import { getApiAllUsers } from "@/api/user/getApiAllUsers";
 
 const fetchUsers = getApiAllUsers;
 
+const queryClient = new QueryClient();
+
 const useUsersQuery = () => {
-  return useQuery("users", fetchUsers);
+  return useQuery({ queryKey: ["users"], queryFn: fetchUsers });
 };
 
 const AdminUsers = () => {
   const { data: users, isLoading, error, refetch } = useUsersQuery();
 
-  const deleteUserMutation = useMutation(
-    (userId) => axios.delete(`https://jwt-mongo.vercel.app/api/v1/users/${userId}`),
-    {
+  const deleteUser = (userId:string) => axios.delete(`https://jwt-mongo.vercel.app/api/v1/users/${userId}`);
+
+  const deleteUserMutation = useMutation({
+      mutationFn: deleteUser,
       onSuccess: () => {
         // データの削除後にタスク一覧を再取得する
-        refetch();
+        queryClient.invalidateQueries({ queryKey: ["users"] });
       },
-    }
+    },
   );
 
   const handleDelete = async (userId: any):Promise<void> => {
