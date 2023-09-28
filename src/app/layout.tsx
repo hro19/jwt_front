@@ -15,16 +15,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <AppProvider>
-      <html lang="en">
-        <body className={inter.className}>
+    <html lang="en">
+      <body className={inter.className}>
+        <AppProvider>
           <div className="flex flex-col justify-between mb-2">
             <UtilityMenu />
             <GlobalMenu />
           </div>
           <div className="mx-auto px-4">{children}</div>
-        </body>
-      </html>
-    </AppProvider>
+        </AppProvider>
+      </body>
+    </html>
   );
 }

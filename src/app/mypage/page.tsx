@@ -6,6 +6,7 @@ import AuthVerify from "@/utils/AuthVerify";
 import { useAtom } from "jotai";
 import { verifyUserAtom } from "@/jotai/userAtoms";
 import { Task } from "@/ts/Task";
+import { Box,Heading } from "@chakra-ui/react";
 
 const fetchUserTasks = async (userId: string):Promise<Task[]> => {
   try {
@@ -44,9 +45,10 @@ const Verify = () => {
     <>
       <AuthVerify />
       <div>
-        <h1 className="text-3xl font-bold">タスク一覧</h1>
+        <Box bg={"green"} color={"white"} py={4}>
+          <Heading as="h1" fontSize={"2xl"}>タスク一覧</Heading>
+        </Box>
         <div>
-          <h3>あなたのユーザーID【{!isLoading && verifyUser && verifyUser._id}】</h3>
           {isLoading ? (
             <p>読み込み中...</p>
           ) : tasks.length === 0 ? (
