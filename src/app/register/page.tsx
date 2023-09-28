@@ -6,6 +6,7 @@ import ErrorBox from "@/components/ErrorBox";
 import authApi from "@/api/authApi";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { setCookie } from "cookies-next";
 
 function Resister() {
   const router = useRouter();
@@ -20,7 +21,8 @@ function Resister() {
   const onSubmit = async (data: any) => {
     try {
       const newuser = await authApi.register(data);
-      localStorage.setItem("token", newuser.data.token);
+      setCookie("token", newuser.data.token, { maxAge: 60 * 60 * 24 });
+      // localStorage.setItem("token", newuser.data.token);
       console.log(newuser.data);
       router.push("/admin/users");
     } catch (error: any) {

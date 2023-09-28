@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAtom } from "jotai";
 import { userAtom } from "@/jotai/userAtoms";
+import { setCookie } from "cookies-next";
 
 function Login() {
   const [user, setUser] = useAtom(userAtom);
@@ -33,7 +34,8 @@ function Login() {
         username,
         password,
       });
-      localStorage.setItem("token", res.data.token);
+      setCookie("token", res.data.token, { maxAge: 60 * 60 * 24 });
+      // localStorage.setItem("token", res.data.token);
       router.push("/mypage");
     } catch (err) {
       // console.log(err);

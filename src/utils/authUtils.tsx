@@ -1,9 +1,10 @@
 import authApi from "../api/authApi";
+import { getCookie } from "cookies-next";
 
 const authUtils = {
   //トークンチェック
   isAuthenticated: async () => {
-    const token = localStorage.getItem("token");
+    const token = getCookie("token");;
     // console.log(token);
     if (!token) return false;
     try {
