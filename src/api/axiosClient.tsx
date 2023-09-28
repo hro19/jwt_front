@@ -14,7 +14,7 @@ const axiosClient = axios.create({
 });
 
 //APIを叩く前に前処理を行う
-axiosClient.interceptors.request.use(async (config) => {
+axiosClient.interceptors.request.use(async (config:any) => {
   return {
     ...config,
     headers: {
