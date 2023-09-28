@@ -8,21 +8,20 @@ import AuthVerify from "@/utils/AuthVerify";
 import TaskTable from "@/components/admin/TaskTable";
 import { getApiAllTasks } from "@/api/task/getApiAllTasks";
 
-const fetchTasks = getApiAllTasks;
-
 const queryClient = new QueryClient();
 
 const useTasksQuery:any = () => {
-  return useQuery({ queryKey: ["tasks"], queryFn: fetchTasks });
+  return useQuery({ queryKey: ["tasks"], queryFn: getApiAllTasks });
 };
 
 const Tasks = () => {
   const { data: tasks, isLoading, error, refetch } = useTasksQuery();
 
-  const deleteTaskMutation = useMutation(
-    (taskId: string) =>
-      axios.delete(`https://jwt-mongo.vercel.app/api/v1/tasks/${taskId}`),
-    {
+  const deleteTask = (taskId: string) =>
+    axios.delete(`https://jwt-mongo.vercel.app/api/v1/tasks/${taskId}`);
+
+  const deleteTaskMutation = useMutation({
+      mutationFn: deleteTask,
       onSuccess: () => {
         // データの削除後にタスク一覧を再取得する
         queryClient.invalidateQueries({ queryKey: ["tasks"] });
@@ -30,9 +29,11 @@ const Tasks = () => {
     }
   );
 
-  const handleDelete = async (taskId: string) => {
+  const handleDelete = async (taskId: string): Promise<void> => {
     try {
       await deleteTaskMutation.mutateAsync(taskId);
+      // タスク一覧を再取得する
+      refetch();
     } catch (error) {
       console.log(error);
     }
