@@ -1,10 +1,10 @@
 export default function Home() {
+  
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="relative flex place-items-center before:absolute ">
-            dddd
-      </div>
-
+    <main className="p-24">
+      <h2 className="text-lg text-sky-600">
+        トップページ
+      </h2>
     </main>
   );
 }

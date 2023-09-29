@@ -1,28 +1,19 @@
-"use client";
-
 import React from "react";
+import { cookies } from "next/headers";
 import AuthVerify from "@/utils/AuthVerify";
-import { useAtom } from "jotai";
-import { verifyUserAtom } from "@/jotai/userAtoms";
+import UserInfoClient from "./UserInfoClient";
+
+const cookieStore = cookies();
+const token: any = cookieStore.get("token");
 
 const Verify = () => {
-    const [verifyUser, setVerifyUser] = useAtom(verifyUserAtom);
-
   return (
     <>
+      <h2 className="text-xl font-bold">マイページ認証確認(サーバーコンポネント内)</h2>【
+      {token.name}情報】{token.value}
+      <hr />
       <AuthVerify />
-      <div>
-        <h1 className="text-3xl font-bold">マイページ認証確認</h1>
-        <hr />
-        <div>
-          {verifyUser && (
-            <>
-              <h4>{verifyUser._id}</h4>
-              <p>{verifyUser.username}</p>
-            </>
-          )}
-        </div>
-      </div>
+      <UserInfoClient />
     </>
   );
 };
