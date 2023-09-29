@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Button } from "@chakra-ui/react";
 
 const AdminMenu = () => {
       const pathname = usePathname();
@@ -26,17 +27,21 @@ const AdminMenu = () => {
     <div className="flex flex-col items-center justify-between">
       <div className="grid gap-2 text-center grid-cols-2 text-base lg:text-2xl">
         {adminSubmenus.map((menu, index) => (
-          <Link
-            key={index}
-            href={menu.href}
-            className={`mb-3 px-3 py-2 font-semibold text-center text-white rounded-md ${
-              menu.bg_color
-            } ${menu.hover_bg_color} ${
-              pathname === menu.href ? "opacity-70 pointer-events-none" : ""
-            }`}
-          >
-            {menu.text}
-          </Link>
+            <Button
+              as="a"
+              key={index}
+              href={menu.href}
+              mb={2}
+              px={3}
+              py={2}
+              color={"white"}
+              variant="solid"
+              className={`${menu.bg_color} ${menu.hover_bg_color} ${
+                pathname === menu.href ? "opacity-70 pointer-events-none" : ""
+              }`}
+            >
+              {menu.text}
+            </Button>
         ))}
       </div>
     </div>
