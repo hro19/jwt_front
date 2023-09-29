@@ -6,7 +6,19 @@ import AuthVerify from "@/utils/AuthVerify";
 import { useAtom } from "jotai";
 import { verifyUserAtom } from "@/jotai/userAtoms";
 import { Task } from "@/ts/Task";
-import { Box,Heading } from "@chakra-ui/react";
+import { MdCheckCircle, MdPlaylistAddCheck } from "react-icons/md";
+import {
+  Box,
+  Heading,
+  List,
+  ListItem,
+  ListIcon,
+  OrderedList,
+  UnorderedList,
+  Icon,
+  Spinner,
+  Center,
+} from "@chakra-ui/react";
 
 const fetchUserTasks = async (userId: string):Promise<Task[]> => {
   try {
@@ -45,24 +57,36 @@ const Verify = () => {
     <>
       <AuthVerify />
       <div>
-        <Box bg={"green"} color={"white"} py={4}>
-          <Heading as="h1" fontSize={"2xl"}>タスク一覧</Heading>
+        <Box bg={"green.700"} color={"white"} py={4} mb={"5"}>
+          <Heading as="h1" fontSize={"2xl"} px={"6"}>
+            <Icon as={MdPlaylistAddCheck} mr={"2"} fontSize={"3xl"} />
+            タスク一覧
+          </Heading>
         </Box>
-        <div>
+        <Box>
           {isLoading ? (
-            <p>読み込み中...</p>
+            <Center>
+            <Spinner
+              thickness="4px"
+              speed="0.65s"
+              emptyColor="gray.200"
+              color="green.500"
+              size="xl"
+              />
+            </Center>
           ) : tasks.length === 0 ? (
             <p>タスクが登録されておりません</p>
           ) : (
-            <ul>
+            <List spacing={3}>
               {tasks.map((task: any) => (
-                <li key={task._id}>
+                <ListItem key={task._id} fontSize={"xl"}>
+                  <ListIcon as={MdCheckCircle} color="green.700" />
                   {task.name} - {task.completed ? "完了" : "未完了"}
-                </li>
+                </ListItem>
               ))}
-            </ul>
+            </List>
           )}
-        </div>
+        </Box>
       </div>
     </>
   );
