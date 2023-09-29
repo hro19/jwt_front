@@ -26,7 +26,7 @@ const UtilityMenu = () => {
       </Box>
       <Spacer />
       <Box mr="3">
-        <HStack spacing={1}>
+        <HStack spacing={2}>
           {uMenus.map((menu, index) => (
             <Link
               key={index}
