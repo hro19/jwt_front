@@ -7,6 +7,7 @@ import authApi from "@/api/authApi";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { setCookie } from "cookies-next";
+import { useToast } from "@chakra-ui/react";
 
 function Resister() {
   const router = useRouter();
@@ -18,12 +19,20 @@ function Resister() {
   } = useForm({ mode: "onChange" });
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null); // 初期値は null とする
+  const toast = useToast();
   const onSubmit = async (data: any) => {
     try {
       const newuser = await authApi.register(data);
       setCookie("token", newuser.data.token, { maxAge: 60 * 60 * 24 });
       // localStorage.setItem("token", newuser.data.token);
-      console.log(newuser.data);
+      toast({
+        title: "新規登録",
+        description: "新規登録を完了しました",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        colorScheme: "blue",
+      });
       router.push("/admin/users");
     } catch (error: any) {
       console.error(error);
@@ -94,11 +103,12 @@ function Resister() {
             id="confirmPassword"
           />
           <ErrorBox errors={errors} errorMessage={errorMessage} />
-          <input
+          <button
             type="submit"
-            value="新規登録"
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2 w-[60%] mx-auto"
-          />
+          >
+            新規登録
+          </button>
         </div>
         <p className="text-sm mt-4">
           既に登録済みの方は

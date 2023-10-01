@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { useAtom } from "jotai";
 import { userAtom } from "@/jotai/userAtoms";
 import { setCookie } from "cookies-next";
+import { useToast } from "@chakra-ui/react";
 
 function Login() {
   const [user, setUser] = useAtom(userAtom);
@@ -26,6 +27,7 @@ function Login() {
   const [usernameErrText, setUsernameErrText] = useState("");
   const [passwordErrText, setPasswordErrText] = useState("");
 
+  const toast = useToast();
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const { username, password } = data; // react-hook-formによりdataオブジェクトから入力値を取得
     //ログイン用APIを叩く
@@ -36,6 +38,14 @@ function Login() {
       });
       setCookie("token", res.data.token, { maxAge: 60 * 60 * 24 });
       // localStorage.setItem("token", res.data.token);
+      toast({
+        title: "ログイン",
+        description: "ログインに成功しました",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        colorScheme: "green",
+      });
       router.push("/mypage");
     } catch (err) {
       // console.log(err);
@@ -104,11 +114,12 @@ function Login() {
             {usernameErrText}
             {passwordErrText}
           </p>
-          <input
+          <button
             type="submit"
-            value="ログイン"
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2 w-[60%] mx-auto"
-          />
+          >
+            ログイン
+          </button>
         </div>
         <p className="text-sm mt-4">
           アカウントを持っていませんか？
