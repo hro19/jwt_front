@@ -1,4 +1,5 @@
 import React from "react";
+export const runtime = "edge";
 import { cookies } from "next/headers";
 import UserInfoClient from "./UserInfoClient";
 
