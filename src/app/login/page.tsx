@@ -5,6 +5,7 @@ import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 import ErrorBox from "@/components/ErrorBox";
 import authApi from "@/api/authApi";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useAtom } from "jotai";
 import { userAtom } from "@/jotai/userAtoms";
@@ -70,7 +71,7 @@ function Login() {
   return (
     <div className="flex flex-col items-center mt-10">
       <h1 className="text-3xl font-bold mb-8 max-w-[240px] w-[80%]">
-        <img src="/logo.png" alt="タスク管理app" />
+        <Image src="/logo.png" alt="ロゴ" width={230} height={57} />
       </h1>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center">
         <div className="flex flex-col w-72 mx-2">
