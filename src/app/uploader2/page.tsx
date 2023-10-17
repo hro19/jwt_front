@@ -7,11 +7,11 @@ function App() {
   const [file, setFile] = useState("");
   const [isUploaded, setIsUploaded] = useState(false);
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     setFile(e.target.files[0]);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e:any) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("file", file);
@@ -20,8 +20,8 @@ function App() {
       body: formData,
     });
 
-    const message = await response.text();
-    console.log(message);
+    const reply = await response.json();
+    console.log(reply.message);
   };
 
   return (
