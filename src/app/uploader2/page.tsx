@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Button, Heading, Flex, Spinner, Text, Link } from "@chakra-ui/react";
+import { chakra,Box, Button, Heading, Flex, Spinner, Text, Link } from "@chakra-ui/react";
 import { useState, useRef } from "react";
 
 function App() {
@@ -63,9 +63,9 @@ function App() {
         </Heading>
       </Box>
       <Box>
-        <form onSubmit={handleSubmit}>
+        <chakra.form onSubmit={handleSubmit}>
           <Box mb={"4"}>
-            <input type="file" name="file" onChange={handleChange} ref={fileInputRef} />
+            <chakra.input type="file" name="file" onChange={handleChange} ref={fileInputRef} fontSize={"2xl"} />
           </Box>
           <Flex>
             <Button
@@ -80,7 +80,7 @@ function App() {
               ファイル送信
             </Button>
           </Flex>
-        </form>
+        </chakra.form>
       </Box>
       <Box my={"4"}>{isUploaded ? <Spinner color="red.500" /> : ""}</Box>
       <Text fontSize={"3xl"}>{reply && reply.message}</Text>
