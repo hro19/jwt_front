@@ -19,21 +19,21 @@ function App() {
     }
   };
 
-  const handleChange = (e: any) => {
-    setFile(e.target.files[0]);
-    if (e.target.files.length > 0) {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.target.files && setFile(e.target.files[0]);
+    if (e.target.files && e.target.files.length > 0) {
       setisFile(true);
     } else {
       setisFile(false);
     }
   };
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setReply(null);
     setIsUploaded(true);
     const formData = new FormData();
-    
+
     file && formData.append("file", file);
 
     try {
