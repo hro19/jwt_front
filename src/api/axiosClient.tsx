@@ -4,7 +4,7 @@ import { getCookie } from "cookies-next";
 
 
 // const BASE_URL = "http://localhost:5000/api/v1";
-const BASE_URL = "https://jwt-mongo.vercel.app/api/v1";
+const BASE_URL = process.env.NEXT_PUBLIC_API_BASIC_URL;
 const getToken = () => getCookie("token");
 
 //axiosのインスタンス化((前処理の共通化のため=全部JSON化しておく))
