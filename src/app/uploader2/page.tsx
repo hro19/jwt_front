@@ -37,7 +37,7 @@ function App() {
     file && formData.append("file", file);
 
     try {
-      const response = await fetch("https://express-cloudflarer2.vercel.app/api/upload", {
+      const response = await fetch(process.env.NEXT_PUBLIC_API_R2_UPLOAD_URL as string, {
         method: "POST",
         body: formData,
       });
