@@ -5,14 +5,14 @@ import { useState, useRef } from "react";
 
 function App() {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const [file, setFile] = useState("");
-  const [isFile, setisFile] = useState(false);
-  const [isUploaded, setIsUploaded] = useState(false);
+  const [file, setFile] = useState<File | null>(null);
+  const [isFile, setisFile] = useState<boolean>(false);
+  const [isUploaded, setIsUploaded] = useState<boolean>(false);
   const [reply, setReply] = useState<any>();
 
   const clearFileInput = () => {
       setIsUploaded(false);
-      setFile("");
+      setFile(null);
       setisFile(false);
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
@@ -33,7 +33,8 @@ function App() {
     setReply(null);
     setIsUploaded(true);
     const formData = new FormData();
-    formData.append("file", file);
+    
+    file && formData.append("file", file);
 
     try {
       const response = await fetch("https://express-cloudflarer2.vercel.app/api/upload", {
