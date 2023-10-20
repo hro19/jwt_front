@@ -2,6 +2,8 @@
 
 import { chakra,Box, Button, Heading, Flex, Spinner, Text, Link } from "@chakra-ui/react";
 import { useState, useRef } from "react";
+import BeatLoader from "react-spinners/BeatLoader";
+import { AttachmentIcon,EmailIcon } from "@chakra-ui/icons";
 
 function App() {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -65,7 +67,13 @@ function App() {
       <Box>
         <chakra.form onSubmit={handleSubmit}>
           <Box mb={"4"}>
-            <chakra.input type="file" name="file" onChange={handleChange} ref={fileInputRef} fontSize={"2xl"} />
+            <chakra.input
+              type="file"
+              name="file"
+              onChange={handleChange}
+              ref={fileInputRef}
+              fontSize={"2xl"}
+            />
           </Box>
           <Flex>
             <Button
@@ -76,13 +84,16 @@ function App() {
               px={"4"}
               py={"3"}
               type="submit"
+              isLoading={isUploaded}
+              leftIcon={<AttachmentIcon />}
+              loadingText="送信中"
+              spinner={<BeatLoader size={8} color="white" />}
             >
               ファイル送信
             </Button>
           </Flex>
         </chakra.form>
       </Box>
-      <Box my={"4"}>{isUploaded ? <Spinner color="red.500" /> : ""}</Box>
       <Text fontSize={"3xl"}>{reply && reply.message}</Text>
     </>
   );
