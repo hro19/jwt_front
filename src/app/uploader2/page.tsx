@@ -73,6 +73,7 @@ function App() {
               onChange={handleChange}
               ref={fileInputRef}
               fontSize={"2xl"}
+              accept=".png, .jpg"
             />
           </Box>
           <Flex>
