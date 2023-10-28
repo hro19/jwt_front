@@ -22,7 +22,7 @@ const AuthVerify = () => {
     };
 
     checkAuth();
-  }, []);
+  }, [router,setVerifyUser]);
 
   return <></>;
 };

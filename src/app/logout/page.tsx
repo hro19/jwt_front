@@ -24,7 +24,7 @@ const Page = () => {
       router.push("/");
       ref.current = true;
     }
-  }, []);
+  }, [router, toast]);
 
   return <></>;
 };
