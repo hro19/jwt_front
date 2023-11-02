@@ -10,14 +10,14 @@ import apiTask from "@/api/apiTask";
 const queryClient = new QueryClient();
 
 const useTasksQuery:any = () => {
-  return useQuery({ queryKey: ["tasks"], queryFn: apiTask.getApiAllTasks });
+  return useQuery({ queryKey: ["tasks"], queryFn: apiTask.getAll });
 };
 
 const Tasks = () => {
   const { data: tasks, isLoading, error, refetch } = useTasksQuery();
 
   const deleteTaskMutation = useMutation({
-    mutationFn: apiTask.deleteTask,
+    mutationFn: apiTask.deleteSingle,
     onSuccess: () => {
       // データの削除後にタスク一覧を再取得する
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
