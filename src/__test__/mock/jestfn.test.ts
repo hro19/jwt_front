@@ -1,6 +1,6 @@
-//【参考サイト】qiita.com/only/items/466a09c8602466fe2333
+//【参考サイト】https://qiita.com/only/items/466a09c8602466fe2333
 
-https: describe("jest.fn基礎の1", () => {
+describe("jest.fn基礎の1", () => {
   function exampleFunction(fn: () => void): void {
     fn();
     fn();
