@@ -32,6 +32,10 @@ test("引数5個で足し算計算", () => {
   expect(sum(7, 7, 7, 7, 7)).toBe(35);
 });
 
+test("引数6個で足し算計算", () => {
+  expect(sum(6, 6, 6, 6, 6, 6)).toBe(36);
+});
+
 const teamsMember = {
   name: "馬場",
   age: 33,
