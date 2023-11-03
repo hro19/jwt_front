@@ -1,4 +1,4 @@
-import { sum } from "./calculator";
+import { sum,calculateTriangleArea } from "./calculator";
 
 test("くまの足し算", () => {
   expect(sum(15,20)).toBe(35);
@@ -123,4 +123,43 @@ test("配列の中のオブジェクトのテストその2", () => {
       },
     ])
   );
+});
+
+test("calculateTriangleArea関数のテストその1", () => {
+  const base = 5;
+  const height = 10;
+  const expectedArea = 25;
+  const actualArea = calculateTriangleArea(base, height);
+  expect(actualArea).toBe(expectedArea);
+});
+
+test("calculateTriangleArea関数のテストその2", () => {
+  const base = 8;
+  const height = 6;
+  const expectedArea = 24;
+  const actualArea = calculateTriangleArea(base, height);
+  expect(actualArea).toBe(expectedArea);
+});
+
+test("calculateTriangleAreaの第一引数がstringの場合のテスト", () => {
+  const base = "snake";
+  const height = 10;
+  const expectedArea = NaN;
+  const actualArea = calculateTriangleArea(base, height);
+  expect(actualArea).toBeNull;
+});
+test("calculateTriangleAreaの第二引数がbooleanの場合のテスト", () => {
+  const base = 10;
+  const height = false;
+  const expectedArea = NaN;
+  const actualArea = calculateTriangleArea(base, height);
+  expect(actualArea).toBeNull;
+});
+
+test("calculateTriangleAreaの引数がマイナス値の場合のテスト", () => {
+  const base = -5;
+  const height = -10;
+  const expectedArea = NaN;
+  const actualArea = calculateTriangleArea(base, height);
+  expect(actualArea).toBeNull;
 });
