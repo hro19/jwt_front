@@ -1,5 +1,9 @@
 import { sum } from "./calculator";
 
+test("くまの足し算", () => {
+  expect(sum(15,20)).toBe(35);
+});
+
 test("基本的な加算式", () => {
   expect(sum(1, 2)).toBe(3);
 });
