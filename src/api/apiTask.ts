@@ -1,10 +1,7 @@
-const apiTask = {
+export const apiTask = {
   async getAll() {
     try {
-      const response = await fetchTasks();
-      validateResponse(response);
-
-      const data = await response.json();
+      const data = await fetchTasks();
       return data;
     } catch (error) {
       console.error("エラーがありました:", error);
@@ -23,7 +20,10 @@ export const fetchTasks = async () => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASIC_URL}/tasks`, {
     cache: "force-cache",
   });
-  return response;
+  validateResponse(response);
+
+  const data = await response.json();
+  return data;
 };
 
 // レスポンスを検証する
