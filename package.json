@@ -23,7 +23,7 @@
     "date-fns": "^2.30.0",
     "framer-motion": "^10.16.4",
     "jest-fetch-mock": "^3.0.3",
-    "jotai": "^2.4.3",
+    "jotai": "^2.5.0",
     "jotai-tanstack-query": "^0.7.2",
     "next": "^14.0.0",
     "node-fetch": "^3.3.2",
