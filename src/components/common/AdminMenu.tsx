@@ -21,11 +21,17 @@ const AdminMenu = () => {
           bg_color: "bg-violet-700",
           hover_bg_color: "hover:bg-violet-500",
         },
+        {
+          href: "/admin/tasks/add",
+          text: "タスク新規",
+          bg_color: "bg-violet-800",
+          hover_bg_color: "hover:bg-violet-600",
+        },
       ];
 
   return (
     <div className="flex flex-col items-center justify-between">
-      <div className="grid gap-2 text-center grid-cols-2 text-base lg:text-2xl">
+      <div className="grid gap-3 text-center grid-cols-3 text-base lg:text-2xl">
         {adminSubmenus.map((menu, index) => (
             <Button
               as="a"

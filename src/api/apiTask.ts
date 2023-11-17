@@ -13,12 +13,29 @@ export const apiTask = {
       method: "DELETE",
     });
   },
+  async add(formData: any) {
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASIC_URL}/tasks`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      validateResponse(response);
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("エラーがありました:", error);
+      throw error;
+    }
+  },
 };
 
 // APIリクエストを行う
 export const fetchTasks = async () => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASIC_URL}/tasks`, {
-    cache: "force-cache",
+    cache: "no-store",
   });
   validateResponse(response);
 
@@ -31,8 +48,8 @@ export const validateResponse = (response: any) => {
   if (!response.ok) {
     throw new Error("無効なレスポンスです");
   }
-  if (response.status !== 200) {
-    throw new Error("HTTPリクエストが200ではありません");
+  if (response.status !== 200 && response.status !== 201) {
+    throw new Error("HTTPリクエストが200または201ではありません");
   }
 };
 
