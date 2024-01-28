@@ -24,6 +24,7 @@ import {
   Td,
   TableCaption,
   TableContainer,
+  Switch,
 } from "@chakra-ui/react";
 
 type FormData = {
@@ -73,7 +74,7 @@ const CreateTodo = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={3} mb={8}>
               <FormControl>
-                <FormLabel htmlFor="name">Name</FormLabel>
+                <FormLabel htmlFor="name">タスク名</FormLabel>
                 <Input
                   type="text"
                   id="name"
@@ -82,8 +83,8 @@ const CreateTodo = () => {
                 />
               </FormControl>
               <FormControl>
-                <FormLabel htmlFor="completed">Completed</FormLabel>
-                <Checkbox id="completed" defaultChecked {...register("completed")} />
+                <FormLabel htmlFor="completed">進行具合</FormLabel>
+                <Switch colorScheme="teal" size="lg" id="completed" defaultChecked={false} {...register("completed")} />
               </FormControl>
               <FormControl>
                 <FormLabel htmlFor="userId">User ID</FormLabel>
