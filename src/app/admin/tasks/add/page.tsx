@@ -15,6 +15,15 @@ import {
   FormLabel,
   Input,
   Stack,
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  TableContainer,
 } from "@chakra-ui/react";
 
 type FormData = {
@@ -60,9 +69,9 @@ const CreateTodo = () => {
   return (
     <>
       <Box>
-        <Container maxW="680px">
+        <Container>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <Stack spacing={3}>
+            <Stack spacing={3} mb={8}>
               <FormControl>
                 <FormLabel htmlFor="name">Name</FormLabel>
                 <Input
@@ -102,15 +111,26 @@ const CreateTodo = () => {
       </Box>
       <hr />
       <hr />
-      <div className="grid gap-4 mx-2 grid-cols-1 lg:grid-cols-3 lg:mx-3 mt-6">
-        {data.map((task: Task) => (
-          <dl key={task._id}>
-            <dt>{task._id}</dt>
-            <dd>{task.name}</dd>
-            <dd>{task.completed ? "完了" : "未着手"}</dd>
-          </dl>
-        ))}
-      </div>
+      <TableContainer>
+        <Table variant='simple'>
+          <Thead>
+            <Tr>
+              <Th>タスクId</Th>
+              <Th>タスク名</Th>
+              <Th isNumeric>進行具合</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {data.map((task: Task) => (
+              <Tr key={task._id}>
+                <Td>{task._id}</Td>
+                <Td>{task.name}</Td>
+                <Td isNumeric>{task.completed ? "完了" : "未着手"}</Td>
+              </Tr>
+            ))}
+          </Tbody>
+        </Table>
+      </TableContainer>
     </>
   );
 };
