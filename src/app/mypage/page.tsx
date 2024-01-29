@@ -20,10 +20,11 @@ import {
   Center,
 } from "@chakra-ui/react";
 
-const fetchUserTasks = async (userId: string):Promise<Task[]> => {
+const fetchUserTasks = async (): Promise<Task[]> => {
   try {
     const response = await axios.get(
-      `https://jwt-mongo.vercel.app/api/v1/tasks/${userId}/usertasks`
+      `https://jwt-mongo.vercel.app/api/v1/tasks/usertasks`,
+      { withCredentials: true }
     );
     return response.data;
   } catch (error) {
@@ -40,7 +41,7 @@ const Verify = () => {
     if (verifyUser && verifyUser._id) {
       const fetchTasks = async () => {
         try {
-          const response = await fetchUserTasks(verifyUser._id);
+          const response = await fetchUserTasks();
           setTasks(response);
           setIsLoading(false);
         } catch (error) {
