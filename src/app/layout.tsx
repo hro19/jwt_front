@@ -1,12 +1,16 @@
 import React from "react";
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Noto_Sans_JP } from "next/font/google";
 import AppProvider from "./provider";
 import UtilityMenu from "../components/common/UtilityMenu";
 import GlobalMenu from "../components/common/GlobalMenu";
 
-const inter = Inter({ subsets: ["latin"] });
+const noto = Noto_Sans_JP({
+  weight: ["400", "700"],
+  style: "normal",
+  subsets: ["latin"],
+ });
 
 export const metadata: Metadata = {
   title: "グローバルチェッカー",
@@ -16,7 +20,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ja">
-      <body className={inter.className}>
+      <body className={noto.className}>
         <AppProvider>
           <div className="flex flex-col justify-between mb-2">
             <UtilityMenu />
