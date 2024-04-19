@@ -16,7 +16,7 @@ export default async function Page() {
         <h2 className="text-3xl font-bold text-center mb-4">ユーザー一覧</h2>
         <div className="grid gap-4 mx-2 grid-cols-1 lg:grid-cols-3 lg:mx-3">
           {users && users.map((user: User) => (
-            <UserTable user={user} handleDelete={handleDelete} key={user._id} />
+            <UserTable user={user} key={user._id} />
           ))}
         </div>
       </div>
