@@ -1,26 +1,19 @@
 import React from "react";
-import { User } from "../../ts/User";
+import { User } from "@/ts/User";
 import AuthVerify from "@/utils/AuthVerify";
+import { Box, Button, Heading, Text } from "@chakra-ui/react";
 
-type UserTableProps = {
-  user: User;
-  handleDelete: (_id:string) => void;
-};
-
-const UserTable = ({ user, handleDelete }: UserTableProps) => {
+const UserTable = ({ user }: {user:User}) => {
   return (
     <>
       <AuthVerify />
-      <div className="border rounded p-4 mb-4">
-        <h2 className="text-lg font-semibold">{user._id}</h2>
-        <p className="text-gray-600">【ユーザー名】{user.username}</p>
-        <button
-          className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded mt-2"
-          onClick={() => handleDelete(user._id)}
-        >
+      <Box className="border rounded p-4 mb-4">
+        <Heading as={"h2"} className="text-lg font-semibold">{user._id}</Heading>
+        <Text className="text-gray-600">【ユーザー名】{user.username}</Text>
+        <Button colorScheme='pink' variant='outline' mt={2}>
           削除
-        </button>
-      </div>
+        </Button>
+      </Box>
     </>
   );
 };
